@@ -2,7 +2,7 @@
 title: 杭电OJ--基础题篇
 date: 2020-03-23 21:00:29
 tags:
-categories: "杭电OJ"
+categories: "刷题记录"
 ---
 记录刷题时候的知识点，顺便看看多久能刷完，没什么知识点就不记了，部分笔记内容来源于网络，目前顺着题目序号做，高亮部分为当前进度。[点击这里](https://github.com/MrChanGG/HDOJ.git)获得源代码。
 
