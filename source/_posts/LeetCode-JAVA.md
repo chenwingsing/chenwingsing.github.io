@@ -152,4 +152,85 @@ class Solution {//这个是贪心策略写法
 }
 
 ```
+## 605 种花问题 easy
+虽说是easy题，但是发现自己想的bug很多，看到了一个很清晰的解题方法：跳格法。注意题目是不能打破原来的种植规则！。情况1：当index遇到1的时候，也就是至少隔一格才能种花，所以i要跳两格。情况2：当index遇到0时候，如果下一格为0，则可以种花（此时n-1），并且顺便跳两格，这里还有个情况就是如果已经是最后一格了，那就也能种花，一开始会想，万一最后一格的前面一格是1呢？注意这个情况不会发生，因为你是跳格法，你跳的index就代表是可能种花的，只需要考虑后面就行。如果下一个格子为1(比如0100)，则这格不能种花，则i要跳3格才可以种花。
+```java
+class Solution {//这个写得比较清晰，但是冗余。
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+         for(int i = 0; i < flowerbed.length && n >0;){
+             if(flowerbed[i] == 1){
+                 i += 2;
+             }
+             else if((flowerbed[i] ==0 && i == flowerbed.length-1) || (flowerbed[i] ==0 && flowerbed[i+1] == 0)){
+                 n--;
+                 i += 2;     
+             }
+             else if(flowerbed[i] ==0 && flowerbed[i+1] == 1){
+                 i +=3;
+             }
+         }
+        return n <= 0;
+    }
+}
+```
+```java
+class Solution {//这个省略了点。
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+         for(int i = 0; i < flowerbed.length && n >0;){
+             if(flowerbed[i] == 1){
+                 i += 2;
+             }
+             else if(i == flowerbed.length-1 ||  flowerbed[i+1] == 0){//因为你的flowerbed[i]不是1就是0，上一步已经判断好了是不是1，所以如果不是1的话自然跳到这里。
+                 n--;
+                 i += 2;     
+             }
+             else {
+                 i +=3;
+             }
+         }
+        return n <= 0;
+    }
+}
+```
+## 452 用最少数量的箭引爆气球 medium(和435相似)
+这个题我的思路是，首先还是对尾巴进行升序排列，然后赋值prev给第一个数的尾巴，开始进行for循环比较第二个数，如果prev大于第二个数的头，也就是这个箭还是可以穿过去，不需要考虑尾巴，因为题目说了头一定比尾巴小。然后如果prev比头小，就说明穿不过去了，这时候就箭的数目加1.以此类推，这个注意count初始值为1，因为本身至少都需要一支箭，可以试试只有一个区间，在循环内counnt是不增加的。这里和435比较：435是不重叠区间，而这里刚好是重叠区间。
+```java
+class Solution {//看了一遍435后自己写的，注意这里的升序有点和435的不一样，因为会有一个用例存在溢出问题，如果按照435的写。[[-2147483646,-2147483645],[2147483646,2147483647]]，sort后是[[2147483646,2147483647],[-2147483646,-2147483645]]，因为他们相减后会溢出，所以用到小于来比较。
+    public int findMinArrowShots(int[][] points) {
+        if(points.length == 0){
+            return 0;
+        }
+        Arrays.sort(points,new Comparator<int []>(){
+            public int compare(int[] points1, int[] points2){
+                if(points1[1] < points2[1]){
+                    return -1;
+                }
+                else return 1;
+            }
+        });
+       
+        int count = 1,prev = points[0][1];
+        for(int i = 1; i < points.length; i++){
+           if(points[i][0] > prev){
+                count++;
+                prev = points[i][1];
+            }           
+        }
+        return count;
+    }
+}
+
+/*这个for循环就比较详细，但是没必要，增加运行的时间。
+    for(int i = 1; i < points.length; i++){
+            if(points[i][0] < prev){
+                continue;
+            }
+            else if(points[i][0] > prev){
+                count++;
+                System.out.println(count);
+                prev = points[i][1];
+            }           
+        }
+*/
+```
 # 指针类问题
