@@ -233,4 +233,61 @@ class Solution {//看了一遍435后自己写的，注意这里的升序有点�
         }
 */
 ```
+## 763 划分字母区间 medium
+自己想的思路比较复杂，太冗余，而且可能考虑的东西不够全面。官方思路:首先用一个长度为26的数组a把每个字母的最后一个位置进行标记。设置start和end，开始循环字符串，访问每个字母，通过之前a来获取他的最后一个位置endc，令end=max（end，endc）。如果循环到i等于end，就说明之前的字母都包括在这个区间内，那就让长度写入partitio，并令start=end+1。
+```java
+//知识点总结，
+List<Integer> partition = new ArrayList<Integer>();
+/*
+List是一个接口
+<>表示了List里面放的对象是什么类型的，上面List里面放的必须是Integer类型的
+
+ArrayList类是一个特殊的数组–动态数组。通过添加和删除元素，就可以动态改变数组的长度。
+优点：
+1、支持自动改变大小 2、可以灵活的插入元素 3、可以灵活的删除元素
+局限：
+比一般的数组的速度慢一些；
+可以调用 List接口里面的内置函数,add,get等方法
+*/
+last[s.charAt(i) - 'a'] = i;
+/*
+String s = "www.runoob.com";
+char result = s.charAt(6);
+输出为n
+所以本题这样的做法，可以把每个字母的最后一个位置记录下来
+*/
+```
+```java
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+          int start = 0, end = 0;
+          int[] last =new int[26];
+          List<Integer> partition = new ArrayList<Integer>();
+          for(int i = 0; i < s.length(); i++){
+              last[s.charAt(i) - 'a'] = i;
+          }
+          for(int i = 0; i < s.length(); i++){
+              end = Math.max(end, last[s.charAt(i) - 'a']);
+              if(i == end){
+                  partition.add(end - start + 1);
+                  start = end + 1;
+              }
+          }
+          return partition;
+    }
+}
+```
+## 122 买卖股票的最佳时机2 easy(可动态规划)
+还是没有独立想出来，想得太复杂，一直纠结怎么用区间来解答。官方解答太多数学公式，总体来说就是只要选择贡献大于0的区间，然后一直累加利润，但是这个做法是不知道第几次买卖的，只能求利润，对于负数，则和0比较就行。秒呀！
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int price = 0;
+        for(int i = 1; i < prices.length; i++){
+            price += Math.max(0, prices[i] - prices[i-1]);
+        }
+    return price;
+    }
+}
+```
 # 指针类问题
