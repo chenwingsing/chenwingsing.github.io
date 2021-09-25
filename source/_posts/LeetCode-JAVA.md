@@ -290,4 +290,45 @@ class Solution {
     }
 }
 ```
+## 406 根据身高重建队列 medium
+[网友思路](https://leetcode-cn.com/problems/queue-reconstruction-by-height/solution/xian-pai-xu-zai-cha-dui-dong-hua-yan-shi-suan-fa-g/)：首先遇到这种数对问题，先排序。根据第一个元素正向排序，根据第二个元素反向排序，或者根据第一个元素反向排序，根据第二个元素正向排序，往往能够简化解题过程。在本题目中，先对数对进行排序，按照数对的元素 1 降序排序，按照数对的元素 2 升序排序。原因是，按照元素 1 进行降序排序，对于每个元素，在其之前的元素的个数，就是大于等于他的元素的数量，而按照第二个元素正向排序，我们希望 k 大的尽量在后面，减少插入操作的次数。小陈补充：如果第一个位置降序，第二个位置也降序排，再按照这样写法去插入的话，有部分用例是不能通过的，比如a[[7,0],[6,1],[5,2]]下一个待插入的数是[5,0]，按照算法应该插入到第一个位置，变成a[[5,0],[7,0],[6,1],[5,2]]这时候我们就发现[5,2]已经错误了，因为前面有三个数大于或者等于了。也就是你插入后，你得保证后面比你大于等于的数不能再插前面，当然这时候也只有等于你的数可以在前面插入，所以，第二个位置的排序，要升序！！！保证同胞小弟位置(第二个位置)先安排好。
+```java
+//知识点
+//这个题可以学到compare对两个位置进行排序的写法，具体看下面的答案这里不多说
+ List<int[]> list = new LinkedList<>();
+/*
+这个的话是双向链表，比创建数组a更加方便，创建数组的话，当你的情况是a的长度大小大于people[i][1]时，你是要插入到a的people[i][1]的位置，这时候你需要进行移动a[people[i][1]]以及后面的每个数据1位，然后才能插进去，这样麻烦。
+最后转成list.toArray(new int[list.size()][]);返回即可。
+
+可以对比763的
+List<Integer> partition = new ArrayList<Integer>();
+
+*/
+```
+```java
+class Solution {
+    public int[][] reconstructQueue(int[][] people) {
+        Arrays.sort(people, new Comparator<int []>(){
+            public int compare(int[] people1, int[] people2){
+                if(people1[0] != people2[0]){
+                    return people2[0] - people1[0];
+                }
+                else{
+                    return people1[1] - people2[1];
+                }
+            }
+        });
+        List<int[]> list = new LinkedList<>();
+        for(int i = 0; i < people.length; i++){
+            if(list.size() > people[i][1]){
+                list.add(people[i][1],people[i]);
+            }
+            else{
+                list.add(list.size(),people[i]);
+            }
+        }
+        return list.toArray(new int[list.size()][]);
+    }
+}
+```
 # 指针类问题
