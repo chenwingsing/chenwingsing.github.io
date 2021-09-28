@@ -81,7 +81,7 @@ class Solution {//这个有点不一样，分别创建两个数组，对应满�
         int[] left = new int[ratings.length];
         int[] right = new int[ratings.length];
         Arrays.fill(left, 1);
-        Arrays.fill(right, 1);
+        Arrays.fill(right, 1);//把right数组全部填充为1，如果长度是长，则right=[1,1,1]
         for(int i = 1; i < ratings.length; i++)
             if(ratings[i] > ratings[i - 1]) left[i] = left[i - 1] + 1;
         int count = left[ratings.length - 1];
@@ -197,7 +197,7 @@ class Solution {//这个省略了点。
                  i += 2;     
              }
              else {
-                 i +=3;
+                 i += 3;
              }
          }
         return n <= 0;
