@@ -372,4 +372,67 @@ class Solution {//只能修改一次，让数组递增。
     }
 }
 ```
-# 指针类问题
+# 双指针
+## 167 两数之和2 easy
+注意题目给的数组是非递减顺序排列（也就是总体递增，然后可能有两个相邻的数是相等），所以思路上很简单，两个变量去追踪这个数组，一头一尾巴，如果两数之和小于target，左边就需要移动一位，反之则右边需要移动一位。
+```java
+class Solution {//一开始根据书上思路写的，超时了~~~可能是暴力解法的原因，而且这个代码尚未验证是否正确。
+    public int[] twoSum(int[] numbers, int target) {
+        int j = numbers.length-1;
+        int[] ans = new int[2];
+        for(int i = 0; i < numbers.length-1 && i < j;){
+           if(numbers[i] + numbers[j] == target)
+           {
+               ans[0] = i+1;
+               ans[1] = j+1;
+              
+           }
+           else if(numbers[i] + numbers[j] < target){
+               i++;
+           }
+           else if(numbers[i] + numbers[j] > target){
+               j--;
+           }
+        }
+        return ans;
+    }
+}
+
+```
+```java
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int i = 0;
+        int j = numbers.length-1;
+        //int[] ans = new int[2];
+        while(i < j){
+            int  sum = numbers[i] + numbers[j];
+            if(sum == target){
+                break;
+            }
+            else if(sum < target){
+                i++;
+            }
+            else if(sum > target){
+                j--;
+            }
+        }
+        return new int[]{i + 1, j + 1};//这样就不用先去定义一个数组了。
+    }
+}
+```
+## 88 合并两个有序数组 easy
+题目给的是两个非递减数组，思路是用m,n来指向两个数组的尾巴，还有pos来定位。首先要注意是在数组1的基础上去排，不需要额外开辟一个数组。pos定位在数组1的尾巴，开始对比两个数组的尾巴，哪个大就先复制过去。这里最后要注意，如果数组1复制完了，但是数组2还有，务必要记得继续复制。反之如果数组2复制完了，则不需要操作，因为数组1本身就是非递减，而且返回的数组就是他自己。
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+         int pos = m-- + n-- -1;//这样写的话就少了一步，别忘了数组大小和数组位置是相差1.
+         while(m >= 0 && n >= 0){
+             nums1[pos--] = nums1[m] > nums2[n] ? nums1[m--] :nums2[n--];//注意是哪个大才会自减减哦。不是每次都自减减。
+         }
+         while(n >= 0){
+             nums1[pos--] = nums2[n--];//务必不要忘记如果数组2还没复制完这个事！！！！！此时的数组1已经复制完啦！！！
+         }
+    }
+}
+```
