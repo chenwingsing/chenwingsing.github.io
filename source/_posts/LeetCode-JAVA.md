@@ -436,3 +436,40 @@ class Solution {
     }
 }
 ```
+## 142 环形链表2 medium
+这个题涉及了一些数学计算，感谢[网友](https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/)讲解，这里复述一下：设置两个指针，一个为fast，一个为slow，fast每次走2步，slow每次走1步，设链表为a+b个节点，a为抵达环状的步数，b为环状的节点数。没有环状的链表很容易考虑，这里直接讲有环状的情况，也就是fast和slow会相遇：首先可以得到第一个关系式f=2s，这个是slow和fast的步数关系。第二个关系式是f=s+nb，因为fast比slow快，所以最终一定能追上，这时候呢，其实fast比slow多走了n个环。根据这两个关系，可以得到<mark>f=2nb</mark>,<mark>s=nb</mark>。接下来我们考虑，一个指针从头走到环状开头走过的步数<mark>k=a+nb</mark>，当n为0，也就是你走了a步到了环状的门口，然后n=1的话，你相当于绕了一圈环，然后又到了门口。现在有了三个表达式，从head结点走到入环点需要走:a + nb， 而slow已经走了nb（之前推了相遇的时候他们两个的关系），那么slow再走a步就是入环点了,如何知道slow刚好走了a步？fast从新从head开始和slow指针一起走，再相遇时刚好就是a步。
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast = head, slow = head;
+        while(true){
+            if(fast == null || fast.next == null){//注意别忘了是两个条件
+                return null;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                break;
+            }
+        }
+        fast = head;
+        while(slow != fast){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return fast;
+        
+    }
+}
+```
