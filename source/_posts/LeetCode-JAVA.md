@@ -4,11 +4,7 @@ date: 2021-09-20 10:48:01
 tags: 
 categories: "刷题记录"
 ---
-<<<<<<< HEAD
 按照[《Leetcode101-A Leetcode Gringding Guide》](https://github.com/changgyhub/leetcode_101)顺序记录。除此之外，开始正视代码书写规范。
-=======
-按照[《Leetcode101-A Leetcode Gringding Guide》](https://github.com/changgyhub/leetcode_101)顺序记录
->>>>>>> 52288f2321ba9974432bb20ba0d8a8ebb5f312a6
 <!--more--> 
 # 贪心算法  
 ## 445 分发饼干 easy
@@ -476,7 +472,6 @@ public class Solution {
         
     }
 }
-<<<<<<< HEAD
 ```
 ## 76 最小覆盖子串 hard
 依旧是[网友](https://leetcode-cn.com/problems/minimum-window-substring/solution/tong-su-qie-xiang-xi-de-miao-shu-hua-dong-chuang-k/993501)的思路，这个题在于需要考虑不少东西，这里简单描述一下：首先是建立一个128的ASCII列表，第一步先记录t中每个字符的数量。定义好l和r初始位置，还有用count去记录还需要的字符数量，这样就不用每次去查看need中哪个字符还大于0。开始while循环，用r去遍历整个S串，经过每个r的位置去提取字符c，首先判断c在need中的情况，如果是大于0，说明这个字符是符合t串的。然后减去一个count，代表已经找到了一个符合的字符，接下来是need中减去字符c的数量，注意，这里也包括不在t中的字符，不在t的中字符减去自然是为负数，代表这个字符是多余的。然后判断count为0的情况，count为0，代表已经找到符合的子串了，但是题目要求的size是最小的，所以可以缩减范围，当l小于r，并且里面有多余的字符，我们首先在need中加回去，然后移动l，然后开始重置size的大小，注意这时候的start变成新的l。接来下是移动l，看看还有没有更小的窗口，注意这里用start去保存这个开始的位置，而不是直接用l，这是有含义的，因为你的r是要遍历整个S串，这样你才知道哪个窗口是最小的，所以只有当size更小时候，我们才去更新更新start值，再加上size大小，就可以找到最小的串位置。这时候你无需当心l和r移动的位置了。务必务必注意，移动l的时候，请记得更新need和count以及l！！！
@@ -1417,6 +1412,53 @@ class Solution {
     }
 }
 ```
-=======
+## !417 太平洋大西洋水流问题 medium
+一开始看了半天例子，以为那几点是形成河流的样子。ok，现在说下题目意思，是找出所有的点，这个点可以流向太平洋，也能流向大西洋 ，所以看例子的时候，单独看每一个点，然后需要自己画出流动方向。
+!代表我在[Leetcode](https://leetcode-cn.com/problems/pacific-atlantic-water-flow/solution/shen-du-sou-suo-dfsxi-wang-ke-yi-yong-zu-65si/)上写题解了，哈哈。
+```java
+class Solution {
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        int n = heights.length;//二维数组的行数
+        int m = heights[0].length;//二维数据的列数
+        boolean[][] can_reach_p = new boolean[n][m];//初始化可以到达太平洋的数组
+        boolean[][] can_reach_a = new boolean[n][m];//初试化可以到达大西洋的数组
+        for (int i = 0; i < n; i++) {
+            dfs(heights, i, 0, can_reach_p);//搜索左列，也就是靠近太平洋
+            dfs(heights, i, m - 1, can_reach_a);//搜索右列，也就是靠近大西洋
+        }
+        for (int j = 0; j < m; j++) {
+            dfs(heights, 0, j, can_reach_p);//搜索上列，也就是靠近太平洋
+            dfs(heights, n - 1, j, can_reach_a);//搜索下列，也就是靠近大西洋
+        }
+        List<List<Integer>> res = new ArrayList<>();//初始化一个list来保存符合条件的坐标
+        //全部坐标进行判断
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (can_reach_a[i][j] && can_reach_p[i][j]) {//判断这个坐标是否同时流向太平洋和大西洋
+                    res.add(List.of(i, j));
+                }
+            }
+        }
+        return res;
+     
+    }
+    public void dfs(int[][] heights, int i, int j, boolean[][] can_reach) {
+        if (can_reach[i][j] == true) {//如果这个坐标是1，就说明人家早就满足条件了，不需要再进行深度搜索了
+            return;
+        }
+        can_reach[i][j] = true;//首先把这个坐标给置为1，代表可以达到海洋
+        //因为坐标只能进行上下左右移动，也就是(0,1),(0,-1),(1,0),(-1,0)。所以设置成下面这种格式
+        int[] index_i = {0, 0, 1, -1};
+        int[] index_j = {1, -1, 0, 0};
+        for (int index = 0; index < 4; index++) {//上下左右4次坐标都要判断
+            int next_index_i = i + index_i[index];//设置下一个坐标的i
+            int next_index_j = j + index_j[index];//设置下一个坐标的j
+            //需要满足下面的条件才能进行深度搜索，不能超过边界，还有下一个坐标要比原来坐标大或者相等。
+            if (next_index_i >= 0 && next_index_i < heights.length && next_index_j >= 0 && next_index_j < heights[0].length && heights[i][j] <= heights[next_index_i][next_index_j]) {
+                            dfs(heights, next_index_i, next_index_j, can_reach);
+            }
+
+        }
+    } 
+}
 ```
->>>>>>> 52288f2321ba9974432bb20ba0d8a8ebb5f312a6
