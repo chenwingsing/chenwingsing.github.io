@@ -1,12 +1,12 @@
 ---
 title: Github笔记
 date: 2021-12-04 17:27:28
-tags:
+tags: [Github]
 categories: "学习笔记"
 ---
 记录Github操作的笔记,来源于《Github入门与实践》。
 <!--more--> 
-Tips：国内经常打不开Github，请在cmd上输入ipconfig /flushdns刷新DNS即可。
+Tips：国内经常打不开Github，发现一个不错的[项目](https://github.com/521xueweihan/GitHub520)可以解决这个问题，或者使用UU加速器的学术资源加速，cmd刷新DNS命令：ipconfig /flushdns。
 
 # 需要掌握的语法
 1. Talklist
@@ -87,7 +87,7 @@ Tips：国内经常打不开Github，请在cmd上输入ipconfig /flushdns刷新D
 
 3. 有个有意思的操作，在本地上有个文件是README.md(从master上clone下来的)，在master上和分支A上都有这个文件(同名但是里面内容不同)，当你在本地切换分支操作的时候，本地这个文件也会随着改变(也就是里面内容改变，不过记得要先把两个仓库的内容都要Pull下来)，很有意思哦，一定要注意分支的概念不同于文件夹。
 
-4. 关于合并,合并首先是不能冲突的，比如一个文件的第一行，在master和分支A上的内容不一样，那就是有冲突。必须要消除冲突后才能合并，合并不是覆盖的意思。冲突解决后记得add和commit
+4. 关于合并,合并首先是不能冲突的，比如一个文件的第一行，在master和分支A上的内容不一样，那就是有冲突。必须要消除冲突后才能合并，合并不是覆盖的意思。冲突解决后记得add和commit。
 
 5. 务必记住一定首先Pull下来，保证仓库文件和本地一样，然后全部在本地上执行，最后再push，毕竟有时候经常time out。
 
@@ -98,7 +98,7 @@ Tips：国内经常打不开Github，请在cmd上输入ipconfig /flushdns刷新D
 8. 关于创建仓库问题，我们在本地Init后所有的操作都是在本地执行，这时候我们想把这些push到一个仓库。首先要去网上创建好一个仓库，务必记得不要初始化readme.md，这样对于我们来整合仓库会有麻烦，虽然是可以强制覆盖。
 
 # PR（Pull Request）实战总结
-1. Fork仓库
+1. Fork仓库。
 
 2. clone在本地。
 
@@ -106,12 +106,12 @@ Tips：国内经常打不开Github，请在cmd上输入ipconfig /flushdns刷新D
 
 4. 打开网页版选择这个仓库，然后点击pull request后新建PR查看文件对比然后填写相关信息即可。
 
-5. 关于仓库维护（也就是更新fork的仓库。1.首先设置远程仓库：git remote add upstream 原仓库名 2.获取最新数据：git fetch upstream 3将upstream/master与当前master合并：git merge upstream/master
+5. 关于仓库维护（也就是更新fork的仓库）1.首先设置远程仓库：git remote add upstream 原仓库名 2.获取最新数据：git fetch upstream 3将upstream/master与当前master合并：git merge upstream/master
 
 # 接收到PR如何操作
-1. 首先在本地上有我们自己原始仓库的数据
+1. 首先在本地上有我们自己原始仓库的数据。
 
-2. get remote add PR发送者 git@github.com:PR发送者/仓库名称.git 然后git fetch 
+2. get remote add PR发送者 git@github.com:PR发送者/仓库名称.git，然后git fetch。 
 
 3. 然后我们自己创建一个分支用来测试建议的功能git  checkout -b pr1,这时候pr1的代码就是和原始的仓库一样。
 
@@ -122,3 +122,13 @@ Tips：国内经常打不开Github，请在cmd上输入ipconfig /flushdns刷新D
 6. 接受PR建议：切换到master分支，然后合并PR发送者的分支，git diff origin/仓库名 确认本地与Github端代码差别。
 
 7. 最后git push，PR状态会close。
+
+
+# 一些开发建议
+1. 缩小PR体积，也就是别一次性打发一堆代码提交PR，尽可能少但是提交频率多，这样别人审阅代码不会太累。
+
+2. 准备好测试环境，比如模仿一个和正式环境高度相似的演练，或者是可以进行灰度测试，也就是先推送一小部分用户测试。
+
+3. 熟悉Gitflow流程会有助于提高开发效率。
+
+4. 版本号：一般用X.Y.Z来进行版本管理。X表示重大功能变更或者新版本，此时Y和Z为0。Y代表添加或者删除某些功能。Z代表修复某些BUG的版本。

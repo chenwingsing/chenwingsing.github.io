@@ -2,7 +2,7 @@
 title: Pytorch Tips
 date: 2021-04-02 16:42:31
 tags:
-categories: "学习资源"
+categories: "学习笔记"
 ---
 代码中的一些记录
 <!--more--> 

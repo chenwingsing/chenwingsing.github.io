@@ -1,8 +1,8 @@
 ---
 title: LeetCode-JAVA
 date: 2021-09-20 10:48:01
-tags: 
-categories: "刷题记录"
+tags: [Leetcode]
+categories: "学习笔记"
 ---
 按照[《Leetcode101-A Leetcode Gringding Guide》](https://github.com/changgyhub/leetcode_101)顺序记录。除此之外，开始正视代码书写规范。
 <!--more--> 
@@ -946,7 +946,7 @@ k已经等于1了，直接找剩下比较小的数就行。
 所谓边界的问题,也就是有可能其中一个数组过小，然后进行更新的时候会发现越界，这时候也就是这个小的数组数组全部已经小于第K个数据，然后我们之后关注大的数组找到k就行。
 ```
 # 常用排序算法
-![排序算法](/images/leetcode-java/allsort.jpg)
+![排序算法](/images/leetcode-java/4.jpg)
 ## 快速排序
 ```java
 //本代码是可执行代码，后面的排序算法可以直接用在本模板调用。
@@ -1073,7 +1073,7 @@ public static void merge_sort(int[] arr,int left, int right, int[] temp) {//左�
 }
 ```
 下面画图理解递归是怎么操作的。
-![归并排序](/images/leetcode-java/mergesort.jpg)
+![归并排序](/images/leetcode-java/4-4.jpg)
 ## 冒泡排序
 ```java
 public static void bubble_sort(int[] arr,int right) {//每一轮把最大的一个数沉下去，下一轮就可以不用比较前一轮最后一个数
@@ -1335,7 +1335,7 @@ class Solution {
 }
 ```
 # 一切皆可搜索
-## 695 岛屿的最大面积 medium
+## 695 岛屿的最大面积(DFS) medium
 思路是深度优先遍历，分为主函数和辅助函数，主函数就是遍历每个点的位置，辅助函数就是dfs，设置好不满足的条件，满足条件的继续搜索。
 ```java
 class Solution {
@@ -1379,7 +1379,7 @@ grid[0].length = 13（1个数组中有13个数，表示有多少列，也可以�
 [0,0,0,0,0,0,0,1,1,0,0,0,0]]
 */
 ```
-## 547 省份数量 medium
+## 547 省份数量(DFS) medium
 做这个题的时候陷入到上一题的思维了，做题还是太少了！本题中有多少个二维数组中有多少个一维数组就代表多少个城市，每个一维数组里面的位置代表本城市(也就是i和j相同)或者其他城市(i和j不一样)，位置上为1代表有连接，也就是大家最后是属于一个省份的。
 ```java
 class Solution {
@@ -1412,7 +1412,7 @@ class Solution {
     }
 }
 ```
-## !417 太平洋大西洋水流问题 medium
+## !417 太平洋大西洋水流问题(DFS) medium
 一开始看了半天例子，以为那几点是形成河流的样子。ok，现在说下题目意思，是找出所有的点，这个点可以流向太平洋，也能流向大西洋 ，所以看例子的时候，单独看每一个点，然后需要自己画出流动方向。
 !代表我在[Leetcode](https://leetcode-cn.com/problems/pacific-atlantic-water-flow/solution/shen-du-sou-suo-dfsxi-wang-ke-yi-yong-zu-65si/)上写题解了，哈哈。
 ```java
@@ -1461,4 +1461,579 @@ class Solution {
         }
     } 
 }
+```
+## 46 全排列(回溯法) medium
+DFS基本操作：[修改当前节点状态]->[递归子节点状态]。回溯法：[修改当前节点状态]->[递归子节点状态]->[回改当前节点状态]。回溯法是优先搜索的一种特殊状态。一般在排列，组合，选择类问题使用回溯法，这次官方那个视频讲解不错，本题就是按照这个思路来。
+```java
+知识点
+注意后面的new的写法
+栈：Deque<Integer> path = new ArrayDeque<>();
+list里面还有一个list： List<List<Integer>> res = new ArrayList<>();
+```
+```java
+class Solution {
+    //状态变量：depth，path，used
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        int len = nums.length;
+        boolean[] used = new boolean[len];
+        if (len == 0) {
+            //System.out.println("  res:"+res);
+            return res;
+        }
+        Deque<Integer> path = new ArrayDeque<>();//栈的应用
+        dfs(nums, len, 0, path, used, res);
+        return res;
+    }
+    public void dfs(int[] nums,int len, int depth, Deque<Integer> path, boolean[] used, List<List<Integer>> res) {
+        if (depth == len) {
+            /*下面这一句超级超级重要，如果改成res.add(path)。最后输出是[[],[],[],[],[],[]]。
+            为什么会这样呢？
+            变量 path 所指向的列表 在深度优先遍历的过程中只有一份 ，深度优先遍历完成以后，回到了根结点，成为空列表。
+            在 Java 中，参数传递是 值传递，对象类型变量在传参的过程中，复制的是变量的地址。这些地址被添加到 res 变量，但实际上指向的是同一块内存地址，因此我们会看到 6 个空的列表对象。解决的方法很简单，在 res.add(path); 这里做一次拷贝即可。
+            */
+            res.add(new ArrayList(path));
+            return;
+        }
+        for (int i = 0; i < len; i++) {
+            if (used[i] == true) { //如果发现某个位置已经用了，就跳过
+                continue;
+            }
+            path.addLast(nums[i]);//栈的添加操作
+            used[i] = true;//然后把这个位置设置为已经用了
+            //System.out.println("  递归之前 => " + path+ "  i: " + i + "  used：  " + Arrays.toString(used));
+            dfs(nums, len, depth + 1, path, used, res);//进行递归操作
+            used[i] = false;//回改节点状态
+            path.removeLast();//回改节点状态，也就是栈的移除操作。
+            //System.out.println("递归之后 => " + path+ "  i: " + i+ "  used：  " + Arrays.toString(used));
+        } 
+    }
+}
+```
+下面引用一张[别人图片](https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/)来描述这个算法流程。
+![46题全排列1](/images/leetcode-java/5-4-1.png)
+然后下面这种图片是一些代码流程细节上的理解，注意当代码运行到dfs里面的时候，会回到for，然后for是重新为0的。
+![46题全排列2](/images/leetcode-java/5-4-2.png)
+## 77 组合(回溯法) medium
+注意排列是不重复的，组合是的话[1,2]和[2,1]是一个情况，还有不能对自己组合哦。
+```java
+class Solution {
+//这个写法受到了上一个的影响，不够简洁，实际上完全没有必要用到used，注意有个地方不一样！！！！在唯一一个注释里面！！！
+    public List<List<Integer>> combine(int n, int k) {
+        boolean[] used =new boolean[n];
+        List<List<Integer>> res = new ArrayList<>();
+        if (k <= 0 || n < k) {
+            return res;
+        }
+        Deque<Integer> path = new ArrayDeque<>();
+        int[] nums = new int[n];
+        for(int i = 0; i < n; i++) {
+            nums[i] = i + 1;
+        }
+        dfs(nums, n, k, 0, path, used, res);
+        return res;
+    }
+    public void dfs(int[] nums, int n, int k, int begin, Deque<Integer> path, boolean[] used, List<List<Integer>> res) {
+        if (path.size() == k) {
+            res.add(new ArrayList(path));
+            return;
+        }
+        for (int i = begin; i < n; i++ ) {
+            if (used[i] == true) {
+                continue;
+            }
+            used[i] = true;
+            path.addLast(nums[i]);
+            dfs(nums, n, k, i + 1, path, used, res);//这里不是begin + 1而是i + 1，不然会有重复的组合，因为我们这个题是组合，组合，组合，不是排列！！！！ 比较一下上一题是depth的含义。
+            used[i] = false;
+            path.removeLast();
+        }
+    }
+}
+```
+```java
+//大佬的简洁解法，还有一个解法会更加省时间，但是不好想，也就是剪枝。具体还是看下面的链接。
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
+
+public class Solution {
+
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (k <= 0 || n < k) {
+            return res;
+        }
+        // 从 1 开始是题目的设定
+        Deque<Integer> path = new ArrayDeque<>();
+        dfs(n, k, 1, path, res);
+        return res;
+    }
+
+    private void dfs(int n, int k, int begin, Deque<Integer> path, List<List<Integer>> res) {
+        // 递归终止条件是：path 的长度等于 k
+        if (path.size() == k) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        // 遍历可能的搜索起点
+        for (int i = begin; i <= n; i++) {
+            // 向路径变量里添加一个数
+            path.addLast(i);
+            // 下一轮搜索，设置的搜索起点要加 1，因为组合数理不允许出现重复的元素
+            dfs(n, k, i + 1, path, res);
+            // 重点理解这里：深度优先遍历有回头的过程，因此递归之前做了什么，递归之后需要做相同操作的逆向操作
+            path.removeLast();
+        }
+    }
+}
+
+作者：liweiwei1419
+链接：https://leetcode-cn.com/problems/combinations/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-ma-/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+用下大佬的图理解这个题
+![77组合](/images/leetcode-java/5-5.png)
+总结：77题和46题回溯法，一定要先画图！！！看看他们不一样的点，dfs判断加入path的条件，以及在for循环中dfs的写法，这些都是值得注意的。
+
+## 79 单词搜索(回溯法) medium
+```java
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] visited = new boolean[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                boolean flag = backtracking(i, j, board, word, visited, 0);
+                if (flag) {
+                    return true;
+                }
+            }
+        }
+    return false;
+    }
+        public boolean backtracking(int i, int j, char[][] board, String word, boolean[][] visited, int pos) {
+        if (board[i][j] != word.charAt(pos) || visited[i][j] ==true) {//这两个if判断不能对调,因为首先你得判断配对是不是一样的字符，然后才判断他是不是最后一个字符的位置
+            return false;
+        } else if (pos == word.length() - 1) {
+            return true;
+        }
+        visited[i][j] = true;
+        int[] index_i = {0, 0, 1, -1};
+        int[] index_j = {1, -1, 0, 0};
+        boolean result = false;
+        for (int index = 0; index < 4; index++) {
+            int next_index_i = i + index_i[index];//设置下一个坐标的i
+            int next_index_j = j + index_j[index];//设置下一个坐标的j
+            if (next_index_i >= 0 && next_index_i < board.length && next_index_j >= 0 &&  next_index_j < board[0].length) {
+                boolean flag = backtracking(next_index_i, next_index_j, board, word, visited, pos + 1);
+                if (flag) {
+                    result = true;
+                    break;
+                }   
+            }
+        }
+        visited[i][j] = false;
+        return result;
+        }
+}
+/*还可以改成这样，不太喜欢这种写法。
+    public boolean backtracking(int i, int j, char[][] board, String word, boolean[][] visited, int pos) {
+        //这里改了。
+        if (board[i][j] != word.charAt(pos)) {
+            return false;
+        } else if (pos == word.length() - 1) {
+            return true;
+        } 
+        visited[i][j] = true;
+        int[] index_i = {0, 0, 1, -1};
+        int[] index_j = {1, -1, 0, 0};
+        boolean result = false;
+        for (int index = 0; index < 4; index++) {
+            int next_index_i = i + index_i[index];//设置下一个坐标的i
+            int next_index_j = j + index_j[index];//设置下一个坐标的j
+            if (next_index_i >= 0 && next_index_i < board.length && next_index_j >= 0 &&  next_index_j < board[0].length) {
+                if (visited[next_index_i][next_index_j] == false) {//这里改了，注意这里是next的判断
+                    boolean flag = backtracking(next_index_i, next_index_j, board, word, visited, pos + 1);
+                    if (flag) {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+        }
+        visited[i][j] = false;
+        return result;
+        }
+*/
+```
+下面这个是按照书上思路改写的，但是错误，先放着，未来会修改(已修改，看下面)，初步判断是因为find不是全局变量。
+```java
+class Solution {
+//！！！！这是错误的，错误的！！！正确写法在下一个代码中
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+        boolean[][] visited = new boolean[m][n];
+        boolean find = false;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                backtracking(i, j, board, word, find, visited, 0);
+            }
+        }
+    return find;
+    }
+    public void backtracking(int i, int j, char[][] board, String word, boolean find, boolean[][] visited, int pos) {
+        if (i < 0 || i >= board.length || j < 0 ||  j >= board[0].length) {
+            return;
+        }
+        if (board[i][j] != word.charAt(pos) || visited[i][j] || find) {
+            return;
+        }
+        if (pos == word.length() - 1) {
+            find = true;
+            return;
+        }
+        visited[i][j] = true;
+        backtracking(i + 1, j, board, word, find, visited, pos + 1);
+        backtracking(i - 1, j, board, word, find, visited, pos + 1);
+        backtracking(i, j + 1, board, word, find, visited, pos + 1);
+        backtracking(i, j - 1, board, word, find, visited, pos + 1);
+        visited[i][j] = false;
+    }
+}
+```
+```java
+//正确写法
+class Solution {
+    private boolean find = false;//设为全局变量
+    public boolean exist(char[][] board, String word) {
+        if(board == null) return false;
+        boolean[][] visited = new boolean[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                backTracking(i, j, board, word, visited, 0);//不用传find
+            }
+        }
+        return find;
+    }
+
+    public void backTracking(int i, int j, char[][] board, String word, boolean[][] visited, int pos) {
+        if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || visited[i][j] || board[i][j] != word.charAt(pos) || find) return;
+        if(pos == word.length() - 1) {
+            find = true;
+            return;
+        }
+        visited[i][j] = true;
+        backTracking(i - 1, j, board, word, visited, pos + 1);
+        backTracking(i + 1, j, board, word, visited, pos + 1);
+        backTracking(i, j - 1, board, word, visited, pos + 1);
+        backTracking(i, j + 1, board, word, visited, pos + 1);
+        visited[i][j] = false;
+    }
+}
+```
+## 51 N皇后(回溯法) hard
+久闻的经典题！题目要求就是任何两个皇后都不能在同一行、同一列以及同一条斜线上。思考：斜线怎么判断？
+```java
+//这是别人用java改写labuladong的C++版本，感觉非常好理解。
+class Solution {
+    List<List<String>> res = new ArrayList<>();//这里是全局哦
+    public List<List<String>> solveNQueens(int n) {
+        char[][] board = new char[n][n];
+        //初始化棋盘
+        for (char[] c : board) {
+            Arrays.fill(c, '.');
+        }
+        backtracking(board, 0);
+        return res;
+    }
+    public void backtracking(char[][] board, int row) {
+        //每一行都成功放置好了皇后，注意这里不是board.length - 1，我的理解是，首先你row进来是检查能不能放，所以最后全部放好后，row会+1,，这时候才判断已经全部能放。
+        if (row == board.length) {
+            res.add(charToList(board));
+            return;
+        }
+        int n = board[row].length;//其实有没有row都一样，都是N*N棋盘。
+        //对列进行遍历
+        for (int col = 0; col < n; col++) {
+            if (!isValid(board, row, col)) {//判断能不能放皇后，不能放就跳过
+                continue;
+            }
+            board[row][col] = 'Q';//能放就置为Q
+            backtracking(board, row + 1);//对下一行进行操作
+            board[row][col] = '.';//回溯法关键，也就是恢复原来标记
+        }
+    }
+    public boolean isValid(char[][] board, int row, int col) {
+        int n = board.length;
+        //判断列是否能放皇后
+        for (int i = 0; i < n; i++) {
+            if (board[i][col] == 'Q') {
+                return false;
+            }
+        }
+        //判断右上方有没有皇后冲突
+        for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {//先跳到上一行，列也要加一行，依次类推，注意边界！
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+        //判断左上方有没有皇后冲突
+        for (int i = row - 1, j = col - 1; i >= 0 && j >=0; i--, j--) {//先跳到上一行，列也要减一行，依次类推，注意边界！
+            if (board[i][j] == 'Q') {
+                return false;
+            }
+        }
+        return true;
+        //这里为什么不进行左下方和右下方进行判断？因为是一行行进行放，这时候左下和右下必定没有呀
+    }
+    public List charToList(char[][] board) {
+        List<String> list = new ArrayList<>();
+        for (char[] c : board) {
+            list.add(String.copyValueOf(c));
+        }
+        return list;
+    }
+}
+```
+```java
+本题有很多需要学习的写法
+1.for (char[] c : board) {
+    System.out.print("1");
+  }
+本句输出是1111，也就是说，对于Arrays.fill(c, '.')每次操作，都是[., ., ., .]，一次性把每行的4个位置都填充上，然后一共操作4次而不是16次。
+
+2.Arrays.fill(c, '.');//初始化棋盘这里
+for (int i = 0;i<n;i++){
+    System.out.print(Arrays.toString(board[i]));
+}
+输出结果是：
+[., ., ., .][., ., ., .][., ., ., .][., ., ., .]
+
+3.for (char[] c : board) {
+            list.add(String.copyValueOf(c));
+}
+首先为什么要这么操作，因为输入是一个二维数组来的，最后的输出要符合题目输出，把每一个一维数组加到list中！
+这一段的操作是这样看，首先是输入一个已经摆放好皇后的棋盘
+String.copyValueOf是返回字符串
+然后char c是提取每一行出来，比如第一行.Q..然后add到list中，最后扫描完所有行list是这样[.Q.., ...Q, Q..., ..Q.]，然后再res.add进去。
+```
+## 934 最短的桥(DFS+BFS) medium
+一般广度优先遍历用于求最短路径或者可达性问题。本题实际上就是求两个岛屿之间的最短距离，先任意找到一个岛，然后用广度优先搜索寻找和另外一个岛屿的最短距离。结合了书和[该作者](https://leetcode-cn.com/problems/shortest-bridge/solution/java-bfsyu-dfsshi-yong-by-ppppjqute-jvwv/)的想法。做完这个题其实还是有点不理解，因为首先是找到了第一个岛后就break掉了，那怎么知道其他岛与其他岛会不会有更小的距离呢？经过我的探索，终于知道了，因为题目样例中有且仅有两个岛！！！！！！不会出现第三个岛！！！！务必知道挨着的1是属于一个岛！！！
+```java
+有个地方需要注意，两个陆地挨着的属于一个岛。比如[[1,0,0],[1,0,0],[0,0,0]]这种情况是一个岛，当然了，这个用例是不能被输入的，因为必须要有两个岛。还有这个题返回的是必须翻转0的数目。
+class Solution {
+    public int shortestBridge(int[][] grid) {
+        int[][] direction = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};//四个方向坐标
+        int n = grid.length;
+        int m = grid[0].length;
+        int ans = -1;//初始化距离，这里为什么要设置-1而不是0，因为一进入下面的while后首先是搜索以自己为目标的四周，所以第一次进入while，先ans++，这样就初始化了为0，然后再从我自己扩散出去，而且循环里面是找到了下一个陆地直接返回ans，没有进行加加，一开始提前了ans++。
+        boolean flag = false;
+        Deque<int []> point = new ArrayDeque<>();//队列记录坐标
+        //dfs寻找第一个岛，并把这个岛全部标记为2，注意想象一下周围一圈都是1，表达是一个岛，会把这一圈的1都标记为2
+        for (int i = 0; i < n; i++) {
+            if (flag == true) break;
+            for (int j = 0; j < m ; j++) {
+                if (grid[i][j] == 1) {
+                    dfs(grid, point, i, j); 
+                    flag = true;//代表找到了岛
+                    break;
+                }
+            }
+        }
+        //进行广度搜索，看多少层能到下一个陆地
+        while (!point.isEmpty()) {//point不为空
+            int size = point.size();
+            ans++;//每扩散一次，距离加1
+            for (int i = 0; i < size; i++) {//依次对标记过为2的岛进行操作
+                //System.out.print("hello  "+ ans+"   "+"  ");
+                int[] node = point.poll();//取出队列中第一个岛的坐标，并删除队列中该坐标
+                for (int j = 0; j < 4; j++) {//上下左右寻找
+                    int next_x = node[0] + direction[j][0];
+                    int next_y = node[1] + direction[j][1];
+                    if(next_x < 0 || next_x >= grid.length || next_y < 0 || next_y >= grid[0].length || grid[next_x][next_y] == 2) {//判断：不能超边界以及不能是访问过的陆地
+                        continue;
+                    }
+                    if (grid[next_x][next_y] == 1) {//找到下一个岛
+                        return ans;
+                    }
+                    grid[next_x][next_y] = 2;//走过的地方要标记为2(这些地方可能是水哦)
+                    point.add(new int[]{next_x, next_y});//把这些坐标都记录起来
+                }
+            }
+        }
+        return ans;
+    }
+    public void dfs(int[][] grid, Deque<int []> point, int i, int j) {
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 2 || grid[i][j] != 1) {//边界判断以及走过的地方不搜索还有不是陆地的不搜索
+            return;
+        }
+        grid[i][j] = 2;
+        point.add(new int[]{i, j});
+        dfs(grid, point, i - 1, j);
+        dfs(grid, point, i + 1, j);
+        dfs(grid, point, i, j - 1);
+        dfs(grid, point, i, j + 1);
+
+    }
+}举个例子：
+现在两个岛是这样的，就是一个L型和中间一块小岛
+[[1,0,0,0,0],[1,0,0,0,0],[1,0,1,0,0],[1,0,0,0,0],[1,1,1,1,1]]
+下面最左边的9和7代表队列中的元素个数，hello具体位置在上面代码看，表达进入for循环，hello右边是ans的大小，最右边是取出来的坐标。可以看到，先把L型岛坐标全部放进队列，然后一个个坐标取出来再再看四周(并且也把四周的点加入到队列)，第一轮发现是没有碰到陆地的，所以到了第二轮，第二轮是7因为L型右边的坐标围起来是7个，然后开始继续找，到了2,1坐标，可以知道右边一个位置是1，这时候已经找到了，返回ans。
+9  hello  0     0 0
+hello  0     1 0
+hello  0     2 0
+hello  0     3 0
+hello  0     4 0
+hello  0     4 1
+hello  0     4 2
+hello  0     4 3
+hello  0     4 4
+7  hello  1     0 1
+hello  1     1 1
+hello  1     2 1
+```
+## 126 单词接龙2(回溯+BFS) hard
+单词只差一个字母的可以连接成节点，思考如何去判断只相差一个字母？回溯也就是深度优先搜索的一个应用，用于找出所有情况，BFS也就是找到最短路径，合起来就是找出所有的最短路径。这个题和上一个题差不多。
+```java
+//官方的解答，学到就是我的🤓
+class Solution {
+    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+        List<List<String>> res = new ArrayList<>();
+        Set<String> dict = new HashSet<>(wordList);// 因为需要快速判断扩展出的单词是否在 wordList 里，因此需要将 wordList 存入哈希表，这里命名为「字典」
+        if (!dict.contains(endWord)) {// 特殊用例判断
+            return res;
+        }
+        dict.remove(beginWord);//把beginword在字典里删除掉
+
+        // 第 1 步：广度优先遍历建图
+        // 记录扩展出的单词是在第几次扩展的时候得到的，key：单词，value：在广度优先遍历的第几层
+        Map<String, Integer> steps = new HashMap<>();
+        steps.put(beginWord, 0);
+
+        // 记录了单词是从哪些单词扩展而来，key：单词，value：单词列表，这些单词可以变换到 key ，它们是一对多关系
+        Map<String, List<String>> from = new HashMap<>();
+        int step = 1;
+        boolean found = false;
+        int wordlen = beginWord.length();//记录单词的长度，以便于对每个字符进行更换
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(beginWord);//把开始的单词加进去
+
+        while(!queue.isEmpty()) {//不为空就运行
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {//对queue里面的单词依次操作
+                String currword = queue.poll();//先取出queue第一个单词
+                char[] chararray = currword.toCharArray();//将字符串转换为字符数组
+                for (int j = 0; j < wordlen; j++) {//对每一个位置的字符进行操作
+                    char origin = chararray[j];//先保存原来的字符，以便后面进行恢复
+                    for (char c = 'a'; c <= 'z'; c++) {//每个位置都可以替换26次（包括原来的自己啦）
+                        chararray[j] = c;//替换成果
+                        String nextword = String.valueOf(chararray);//char数组转成字符串
+                        if (steps.containsKey(nextword) && step == steps.get(nextword)) {//初步理解就是，如果大家都在同一个level的词变换，就进行操作添加这个词
+                            //System.out.print("nextword is "+nextword);
+                            //System.out.print("currword is "+currword);
+                            from.get(nextword).add(currword);//如果有这个key的记录, 添加新值
+                            //System.out.println("from is a  "+from);
+                        }
+                        if (!dict.contains(nextword)) {//dict中不存在这个单词就跳过
+                            continue;
+                        }
+
+                        //下面这两句思考一下！！！！！
+                        dict.remove(nextword);//如果从一个单词扩展出来的单词以前遍历过，距离一定更远，为了避免搜索到已经遍历到，且距离更远的单词，需要将它从 dict 中删除
+                        queue.add(nextword); // 那么这一层扩展出的单词进入队列
+                        // 记录 nextword 从 currWord 而来
+                        from.putIfAbsent(nextword, new ArrayList<>());
+                        from.get(nextword).add(currword);
+                        // 记录 nextword 的 step
+                        steps.put(nextword, step);
+                        if (nextword.equals(endWord)) {//等于最后一个单词就把found设置为true
+                            found = true;
+                        }
+                        //System.out.println("dict is "+dict);
+                        //System.out.println("queue is "+queue);
+                        //System.out.println("from is "+from);
+                        //System.out.println("steps is "+steps);
+                    }
+                    chararray[j] = origin;//还原单词
+                }
+            }
+            step++;//level加1
+            if (found) {//找到就打断程序
+                break;
+            }
+        }
+        // 第 2 步：深度优先遍历找到所有解，从 endWord 恢复到 beginWord ，所以每次尝试操作 path 列表的头部
+        if (found) {
+            Deque<String> path = new ArrayDeque<>();
+            path.add(endWord);
+            backtracking(from, path ,beginWord ,endWord ,res);
+        }
+        return res;
+    }
+    //注意这个回溯反着来找，从尾巴一直寻找到最开始，就是根据from记录的信息来寻找
+    public void backtracking(Map<String, List<String>> from, Deque<String> path, String beginWord, String cur, List<List<String>> res) {
+        if (cur.equals(beginWord)) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (String preucrsor : from.get(cur)) {
+            path.addFirst(preucrsor);
+            backtracking(from, path, beginWord, preucrsor, res);
+            path.removeFirst();
+        }
+    }
+}
+/*
+老规矩，看不懂怎么运行就一步步打印出来
+dict is [lot, log, dot, cog, dog]
+queue is [hot]
+from is {hot=[hit]}
+steps is {hit=0, hot=1}
+
+dict is [lot, log, cog, dog]
+queue is [dot]
+from is {dot=[hot], hot=[hit]}
+steps is {hit=0, dot=2, hot=1}
+
+dict is [log, cog, dog]
+queue is [dot, lot]
+from is {lot=[hot], dot=[hot], hot=[hit]}
+steps is {lot=2, hit=0, dot=2, hot=1}
+
+dict is [log, cog]
+queue is [lot, dog]
+from is {lot=[hot], dot=[hot], hot=[hit], dog=[dot]}
+steps is {lot=2, hit=0, dot=2, hot=1, dog=3}
+
+dict is [cog]
+queue is [dog, log]
+from is {lot=[hot], log=[lot], dot=[hot], hot=[hit], dog=[dot]}
+steps is {lot=2, hit=0, log=3, dot=2, hot=1, dog=3}
+
+dict is []
+queue is [log, cog]
+from is {lot=[hot], log=[lot], dot=[hot], cog=[dog], hot=[hit], dog=[dot]}
+steps is {lot=2, hit=0, log=3, dot=2, cog=4, hot=1, dog=3}
+
+//这个是第一个if语句中的输出，对于这个例子，一共才运行了一次，仔细观察cog这个值多了一个log
+nextword is cog
+curword is log
+from is a  {lot=[hot], log=[lot], dot=[hot], cog=[dog, log], hot=[hit], dog=[dot]}
+*/
+```
+```java
+map和hashmap区别?
+queue和Deque区别?
+add offer等操作区别?
+contains和containskey区别?
+put和putIfAbsent区别：put在放入数据时，如果放入数据的key已经存在与Map中，最后放入的数据会覆盖之前存在的数据，而putIfAbsent在放入数据时，如果存在重复的key，那么putIfAbsent不会放入值。
+测试的时候发现下面两种写法都是可以的，可以百度下他们的不同。
+Deque<String> path = new ArrayDeque<>();
+Deque<String> path = new ArrayList<>();
 ```
