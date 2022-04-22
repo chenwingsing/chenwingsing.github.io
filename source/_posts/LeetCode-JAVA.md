@@ -2037,3 +2037,155 @@ put和putIfAbsent区别：put在放入数据时，如果放入数据的key已经
 Deque<String> path = new ArrayDeque<>();
 Deque<String> path = new ArrayList<>();
 ```
+## 130 被围绕的区域 medium
+采用深度优先遍历递归，首先要理解就是只有被X包围的区域O才被替换，所以在边界的O是不能被替换的，延伸下去的话，和边界O相连的O也是不能够被替换的，所以这个题目的思想就是，从边界O下手，然后找到和这个边界O相连的O，然后把他们都替换成一个字符#，最后再做一次全局的遍历，把没被替换成O的换成X，把#恢复成O。
+```
+class Solution {
+    public void solve(char[][] board) {
+        if (board == null || board.length == 0) {
+            return;
+        }
+        int n = board.length, m = board[0].length;
+        for (int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                boolean isEdge = i == 0 || i == n - 1 || j == 0 || j == m - 1;
+                if (isEdge && board[i][j] == 'O') { //只需要从边界下手，其他地方不需要
+                    dfs(board, i ,j);
+                }
+            }
+          }
+         for (int i = 0; i < n; i++) {  //都遍历完了，再全局遍历进行更换字符
+             for (int j = 0; j < m; j++) {
+                 if  (board[i][j] == 'O') {
+                     board[i][j] = 'X';
+                 }
+                 if (board[i][j] == '#') {
+                     board[i][j] = 'O';
+                 }
+             }
+         }    
+    }
+    public void dfs(char [][]board, int i ,int j) { //深度优先遍历
+        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || board[i][j] == 'X' || board[i][j] == '#') { //边界条件以及本来是X和#的不需要操作
+            return;
+        }
+        board[i][j] = '#';
+        dfs(board, i + 1, j);
+        dfs(board, i - 1, j);
+        dfs(board, i , j + 1);
+        dfs(board, i , j - 1);
+    }
+}
+```
+## 257 二叉树的所有路径 easy]
+深度优先遍历
+```
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> paths = new ArrayList<String>();
+        constructpath(root, "", paths);
+        return paths;
+    }
+    public void constructpath(TreeNode root, String path, List<String> paths) {
+        if (root != null) {
+            StringBuffer temppath = new StringBuffer(path); //注意这里，每次递归都对变量path进行拷贝构造
+            temppath.append(root.val);
+            if (root.left == null && root.right == null) {  //到了叶子节点就代表结束了
+                paths.add(temppath.toString());
+            }
+            else {
+                temppath.append("->");
+                constructpath(root.left, temppath.toString(), paths);
+                constructpath(root.right, temppath.toString(), paths);
+            }
+        }    
+    }
+}
+```
+```
+对于append和add的用法总结：
+1.append
+Java里只有StringBuffer和StringBuild才有append方法，Sting里是没有append方法的
+
+2.add
+List集合列表中添加元素
+```
+## 46 全排列2 medium
+和[46](https://chenwingsing.github.io/2021/09/20/LeetCode-JAVA/#46-%E5%85%A8%E6%8E%92%E5%88%97-%E5%9B%9E%E6%BA%AF%E6%B3%95-medium)的区别是，这个题是有重复数字的，而且重复数字不是有序的，而是打乱的。
+```
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        int len = nums.length;
+        boolean[] used = new boolean[len];
+        if (len == 0) {
+            return res;
+        }
+        Arrays.sort(nums); //区别1，首先要对数列进行排序
+        Deque<Integer> path = new ArrayDeque<>();
+        dfs(nums, len, 0, path, used, res);
+        return res;
+    }
+    public void dfs(int[] nums, int len, int depth, Deque<Integer> path, boolean[] used, List<List<Integer>> res) {
+        if (depth == len) {
+            res.add(new ArrayList(path));
+            return;
+        }
+        for (int i = 0; i < len; i++) {
+            if (used[i] == true || (i > 0 && nums[i] == nums[i - 1] && used[i - 1] == false)) { //区别2，还要判断和前一个数是不是一样的，这里used[i - 1] == false不好理解，下面单独解释
+                continue;
+            }
+            path.addLast(nums[i]);
+            used[i] = true;
+            dfs(nums, len, depth + 1, path, used, res);
+            used[i] =  false;
+            path.removeLast();
+        }
+    }
+}
+```
+```
+这个题首先要排序哦
+i > 0 && nums[i] == nums[i - 1]这个很好理解，就是重复的数字不要再进行了，但是used[i - 1] == false这个其实是不好理解的，我在做的时候就在想为什么还要多加这个条件呢？。
+
+来自网友1的解释（vis和上面used作用一样）：
+加上 !vis[i - 1]来去重主要是通过限制一下两个相邻的重复数字的访问顺序
+举个栗子，对于两个相同的数11，我们将其命名为1a1b, 1a表示第一个1，1b表示第二个1； 那么，不做去重的话，会有两种重复排列 1a1b, 1b1a， 我们只需要取其中任意一种排列； 为了达到这个目的，限制一下1a, 1b访问顺序即可。 比如我们只取1a1b那个排列的话，只有当visit nums[i-1]之后我们才去visit nums[i]， 也就是如果!visited[i-1]的话则continue
+
+来自网友2的解释：
+for循环保证了从数组中从前往后一个一个取值，再用if判断条件。所以nums[i - 1]一定比nums[i]先被取值和判断。如果nums[i - 1]被取值了，那vis[i - 1]会被置1，只有当递归再回退到这一层时再将它置0。每递归一层都是在寻找数组对应于递归深度位置的值，每一层里用for循环来寻找。所以当vis[i - 1] == 1时，说明nums[i - 1]和nums[i]分别属于两层递归中，也就是我们要用这两个数分别放在数组的两个位置，这时不需要去重。但是当vis[i - 1] == 0时，说明nums[i - 1]和nums[i]属于同一层递归中（只是for循环进入下一层循环），也就是我们要用这两个数放在数组中的同一个位置上，这就是我们要去重的情况。
+```
+# 动态规划
+## 70 爬楼梯 easy
+题目说可以跨一步或者两步，动态规划最重要就是有一个状态转移方程，f(x)=f(x−1)+f(x−2)，你可以理解为，我走到x级的时候，我的方案数量就是走到x-1级的所有数量加上我走到x-2级的所有数量。怎么理解呢？比如我知道x-1级的所有方案数量，我再走一步就可以到达x级，同理，x-2级也是这样。
+```
+class Solution {
+    public int climbStairs(int n) {
+        if (n <= 2) {    //注意力扣是计算1到45级阶梯,0是不算的，然后的话我们的状态转移方程是需要前一级和前前一级的，所以1和2是要已知的。
+            return n;
+        }
+        int pre2 = 1, pre1 = 2, cur = 0; //pre2代表前两级，这里初试的1代表只有一个方案，也就是上第一级楼梯只有一个方案，pre2代表前一级楼梯，可以理解为上第二级楼梯的方案有两种，要么跨两步，要么就是连续走一步。
+        for (int i = 2; i < n ; i++) {  //注意别忘了从第三级楼梯开始，这里和n（就是直接为多少级）含义不一样，不要混淆，因为这个for循环是计数用的，i=2代表从第三级开始。
+            cur = pre1 + pre2; 
+            pre2 = pre1;
+            pre1 = cur;
+        }
+        return cur;
+    }
+}
+```

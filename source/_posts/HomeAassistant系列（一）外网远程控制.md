@@ -1,12 +1,12 @@
 ---
-title: HomeAassistant系列（一）外网远程控制
+title: 树莓派HomeAassistant系列（一）外网远程控制
 date: 2022-01-02 21:37:03
 tags: [cpolar,远程控制]
 categories: "HomeAassistant"
 ---
-局域网控制不够爽！
+HomeAassistant系列
 <!--more-->
-在[这篇文章](https://mrchangg.github.io/2021/12/27/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8D%E5%90%83%E7%81%B0%E8%A1%8C%E5%8A%A8/#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F)中已经讲了如何进行内网穿透来远程连接我们的树莓派，那么如果能够让Homeassistant也能够进行远程连接的话，那么这样会很爽。
+在[这篇文章](https://chenwingsing.github.io/2021/12/27/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8D%E5%90%83%E7%81%B0%E8%A1%8C%E5%8A%A8/#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F)中已经讲了如何进行内网穿透来远程连接我们的树莓派，那么如果能够让Homeassistant也能够进行远程连接的话，那么这样会很爽。
 
 我是在Docker下安装的HA，在设置外网远程连接的时候遇到了非常多的坑，下面先说下我遇到的坑。
 

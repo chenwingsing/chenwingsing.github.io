@@ -4,6 +4,8 @@ date: 2022-01-10 12:36:21
 tags:
 categories:
 ---
+记录用docker安装nginx以及php
+<!--more--> 
 # nginx
 ```
 docker run  --name nginx -d -p 80:80 -v /etc/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /etc/nginx/log:/var/log/nginx  -v /etc/nginx/html:/usr/share/nginx/html  nginx
