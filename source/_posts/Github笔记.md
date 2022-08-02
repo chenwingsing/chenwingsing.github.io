@@ -32,7 +32,7 @@ Tips：国内经常打不开Github，发现一个不错的[项目](https://githu
 
 9. git checkout -b  NAME 创建NAME这个分支，并且会马上切换到这个分支。
 
-10.  git checkout master 切换到master这个分支。
+10. git checkout master 切换到master这个分支。
 
 11. git checkout - 切回到上一个分支，或者直接像上面一样输入名字。
 
@@ -61,6 +61,9 @@ Tips：国内经常打不开Github，发现一个不错的[项目](https://githu
 23. git remote -v 查看仓库远程地址。
 
 24. git branck -D 分支A 删除分支A。
+
+25. rm -rf .git 删除本地仓库
+
 
 # 奇淫技巧
 1. 比较两个分支的区别这样写，比如master和test分支：https://github.com/MrChanGG/Hello-World/compare/master...test
