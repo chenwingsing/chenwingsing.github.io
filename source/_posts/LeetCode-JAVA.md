@@ -281,6 +281,125 @@ public class Main {
   }
 }
 ```
+## ACM 二叉树输入 前序遍历为例
+```java
+package hi;
+import java.util.*;
+public class tree {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        
+        TreeNode root = construct(arr);
+        ArrayList<Integer> list = new ArrayList<>();
+        preorder(root, list);
+        System.out.print(list);
+    }
+    public static void preorder(TreeNode root, ArrayList<Integer> list) {//前序来举个例子
+        if (root == null) {
+            return;
+        }
+        list.add(root.val);
+        preorder(root.left, list);
+        preorder(root.right, list);
+        
+    }
+    public static class TreeNode{
+        int val;
+        TreeNode left;
+        TreeNode right;
+        public TreeNode (int val){
+            this.val = val;
+        }
+        public TreeNode (int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+    public static TreeNode construct(final int[] arr) {
+        List<TreeNode> treeNodeList = arr.length > 0 ? new ArrayList<>(arr.length) : null;
+        TreeNode root = null;
+        for (int i = 0; i < arr.length; i++) {
+            TreeNode node = null;
+            if (arr[i] != -1) {
+                
+                node = new TreeNode(arr[i]);
+            }
+            treeNodeList.add(node);
+            if (i == 0) {
+                root = node;
+            }
+            
+        }
+        
+        for (int i = 0; i * 2 + 1 < arr.length; i++) {
+            TreeNode node = treeNodeList.get(i);
+            if (node != null) {
+                node.left = treeNodeList.get(2 * i + 1);
+                if (i * 2 + 2 < arr.length)//这个必须加上，不然越界了
+                node.right = treeNodeList.get(2 * i + 2);
+            }
+        }
+        return root;
+    }
+
+}
+```
+## ACM 链表 反转链表为例
+```java
+package hi;
+import java.util.Scanner;
+public class listnode {
+    static class ListNode{
+        int val;
+        ListNode next;
+        ListNode(int val) {
+            this.val = val;
+        }
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        String[] param = sc.nextLine().split(" ");//输入的时候就是1 2 3 4 5
+        ListNode dump = new ListNode(-1);
+        ListNode cur = dump;
+        for (String x : param) {
+            cur.next = new ListNode(Integer.parseInt(x));
+            cur = cur.next;
+        }
+        ListNode res = reverse(dump.next);
+        while (res != null) {
+            System.out.print(res.val);
+            if (res.next != null) {
+                System.out.print("->");
+            }
+            res = res.next;
+        }
+        
+    }
+    public static ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
+    }
+
+}
+```
 # 贪心算法  
 ## 445 分发饼干 easy
 依次满足胃口最小的孩子。可以想到先排序，然后再去分配。注意当满足了孩子后,cookie再加一，因为一个饼干只能用一次。
@@ -521,7 +640,7 @@ class Solution {//看了一遍435后自己写的，注意这里的升序有点�
 */
 ```
 ## 763 划分字母区间 medium
-自己想的思路比较复杂，太冗余，而且可能考虑的东西不够全面。官方思路:首先用一个长度为26的数组a把每个字母的最后一个位置进行标记。设置start和end，开始循环字符串，访问每个字母，通过之前a来获取他的最后一个位置endc，令end=max（end，endc）。如果循环到i等于end，就说明之前的字母都包括在这个区间内，那就让长度写入partitio，并令start=end+1。
+自己想的思路比较复杂，太冗余，而且可能考虑的东西不够全面。官方思路:首先用一个长度为26的数组a把每个字母的最后一个位置进行标记。设置start和end，开始循环字符串，访问每个字母，通过之前a来获取他的最后一个位置endc，令end=max（end，endc）。如果循环到i等于end，就说明之前的字母都包括在这个区间内，那就让长度写入partition，并令start=end+1。
 ```java
 //知识点总结，
 List<Integer> partition = new ArrayList<Integer>();
@@ -3673,6 +3792,10 @@ class Solution {
 ### 27 移除元素 easy
 注意数组只能覆盖掉哦，所以用到双指针的思路。数组的元素是不能删的，只能覆盖！数组的元素是不能删的，只能覆盖！数组的元素是不能删的，只能覆盖！
 ```java
+/*
+这个题先考虑如果刚好第一个元素就是目标元素，我们应该怎么操作，这时候fast还在第一格，所以不能替换，那么就是先到下一个元素，再替换
+那么，所以if应该设置为如果不是这个target的时候再操作
+*/
 class Solution {
     public int removeElement(int[] nums, int val) {
         int slow = 0;
@@ -3693,7 +3816,7 @@ class Solution {
 */
 ```
 ### 977 有序数组的平方 easy
-这题给的数组是非递减数组，有负数，如果用暴力算平方然后排序时间复杂度很高，所以没有意思，下面用的是双指针的办法。
+这题给的数组是非递减数组，有负数，如果用暴力算平方然后排序时间复杂度很高，所以没有意思，下面用的是双指针的办法。本题用while的话
 ```java
 /*
 首先我们要知道，这是非递减数组，也就是平方之后的最大值，要么是第一个，要么是最后一个，所以可以用双指针的想法去做。
@@ -3711,6 +3834,25 @@ class Solution {
             if ((nums[i] * nums[i]) > (nums[j]*nums[j])) {
                 result[n--] = nums[i] * nums[i++];//注意前面一个不能i++，因为我们后面还要用到nums[i]
             } else {
+                result[n--] = nums[j] * nums[j--];
+            }
+        }
+        return result;
+    }
+}
+```
+while的写法
+```java
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int[] result = new int[nums.length];
+        int n = nums.length - 1;//别忘了数组最后一个的位置是n-1，而不是n
+        int i = 0;
+        int j = n;
+        while(i <= j) {//用小于等于是因为，当他们i和j共同指向这个数后，继续循环对这个数进行操作，不然用小于的话，到了这个数就不进行操作了。
+            if ((nums[i] * nums[i]) > (nums[j]*nums[j])) {
+                result[n--] = nums[i] * nums[i++];//注意前面一个不能i++，因为我们后面还要用到nums[i]
+            } else {//这里不能再用条件判断，不然会超时，指不用再判断<
                 result[n--] = nums[j] * nums[j--];
             }
         }
@@ -3747,7 +3889,7 @@ class Solution {
     public int[][] generateMatrix(int n) {
         int start = 0;
         int loop = 0;//循环的圈数
-        int i,j;
+        int i,j;//注意必须设置为全局变量
         int count = 1;//填入的数字，从1开始，一直到n*n
         int[][] res = new int[n][n];
         while (loop++ < n / 2) {//这里解释下为什么圈是是n/2，我们想想一个圈的内圈，会上下左右都少一格，也就是x少2，y少2，比如6，第一圈是x是6，第二圈就是4，第三圈就是2，这里代表元素个数，那么用6/2就是总圈数，遇到奇数下面会处理。
@@ -4113,7 +4255,7 @@ class Solution {
     }
 }
 ```
-### 面试题 02.07. 链表相交 easy
+### 面试题 02.07. 链表相交 easy 同160题
 [题目链接](https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/submissions/)，这个题需要注意交点不是数值相等，而是指针相等。
 ```java
 /**
@@ -4152,7 +4294,7 @@ public class Solution {
             int temp = lenA;
             lenA = lenB;
             lenB = temp;
-            ListNode tem = curA;
+            ListNode tem = curA;//不能重复用temp
             curA = curB;
             curB = tem; 
         }
@@ -4168,7 +4310,7 @@ public class Solution {
             curA = curA.next;
             curB = curB.next;
         }
-        return null;
+        return null;//这个不能忘了
     }
 }
 ```
@@ -5215,6 +5357,12 @@ Set<Map.Entry<Integer, Integer>> entries = map.entrySet();
 构建小顶堆的作用是能保证每次取出的元素都是队列中权值最小的
 如果是大顶堆则是new PriorityQueue<>((o1, o2) -> o2.getValue() - o1.getValue());
 PriorityQueue（优先队列）
+
+
+add和remove是一对，源自Collection；
+offer和poll是一对，源自Queue；
+push和pop是一对，源自Deque，其本质是栈（Stack类由于某些历史原因，官方已不建议使用，使用Deque代替）；
+offerFirst/offerLast和pollFirst/pollLast是一对，源自Deque，其本质是双端队列。
 ```
 ## 二叉树
 递归三部曲：
@@ -5421,6 +5569,39 @@ class Solution {
     }
 }
 ```
+因为不推荐用stack，这里用LinkedList替代
+```java
+/*
+LinkedList中的pop()和poll()的区别
+poll是队列数据结构实现类的方法，从队首获取元素，同时获取的这个元素将从原队列删除
+pop是栈结构的实现类的方法，表示返回栈顶的元素，同时该元素从栈中删除，当栈中没有元素时，调用该方法会发生异常
+
+同样，还有push，offer和add区别
+push是把LinkedList当做栈来用
+offer和add是当做链表或者队列来用
+*/
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new LinkedList<>();
+        if (root == null) return result;
+        LinkedList<TreeNode> stack = new LinkedList<>();//List是没有push方法的，所以前面是LinkedList<TreeNode>
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            TreeNode temp = stack.pop();
+            if (temp != null) {
+                if (temp.right != null) stack.push(temp.right);
+                if (temp.left != null) stack.push(temp.left);
+                stack.push(temp);
+                stack.push(null);
+            } else {
+                temp = stack.pop();
+                result.add(temp.val);
+            }
+        }
+        return result;
+    }
+}
+```
 94 中序遍历
 ```java 
 class Solution {
@@ -5487,7 +5668,7 @@ class Solution {
             List<Integer> ietmList = new ArrayList<Integer>();//先定义
             int len = queue.size();//记录长度
             while (len-- > 0) {//while哦，一直加节点
-                TreeNode temp = queue.poll();
+                TreeNode temp = queue.poll();//第二次做的时候，把这个放到了while上面，不应该！
                 ietmList.add(temp.val);
                 if (temp.left != null) queue.offer(temp.left);//这里是temp不是root
                 if (temp.right != null) queue.offer(temp.right);
@@ -5499,26 +5680,26 @@ class Solution {
 }
 ```
 ### 226 翻转二叉树 easy
-递归法，可以对比下前序遍历的递归。
+递归法，可以对比下前序遍历的递归（后序也可以，但是不可以用中序）。
 做这个题一开始用List去保存，哎，年轻。
 ```java
 class Solution {
     public TreeNode invertTree(TreeNode root) {
-        if (root == null) return null;
+        if (root == null) return null;//root也可以
         swapTree(root);
         invertTree(root.left);
-        invertTree(root.right);
+        invertTree(root.right);//第二次写，居然写成swapTree，实质上还是没有理解好递归,处理根的时候，就是交换，然后左右就是递归
         return root;
 
     }
-    public void swapTree(TreeNode node) {
+    public void swapTree(TreeNode node) {//第二次写的时候写了TreeNode left，TreeNode right两个参数，其实不需要，按照遍历递归，先处理左边，再处理右边
         TreeNode temp = node.left;
         node.left = node.right;
         node.right = temp;
     }
 }
 ```
-层序遍历
+层序遍历，可以好好看看
 ```java
 class Solution {
     public TreeNode invertTree(TreeNode root) {
@@ -5555,6 +5736,7 @@ class Solution {
 
 所以如果你是判断了相同的，但是可能不同的没有过滤就进入递归了
 
+再一次做还是错误，首先是大概有印象是用内外，但是没有用到函数compare，导致一直写错
 */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
@@ -5595,6 +5777,8 @@ class Solution {
 这个最小深度和最大深度是有区别的
 比如，如果左子树都是空的，右子树一直叠加，那么最小深度，是算右子树那边的
 那么就需要做出一个判断
+
+第二次做的时候，没有考虑到要同时满足条件再返回1+right或者left
 */
 class Solution {
     public int minDepth(TreeNode root) {
@@ -5644,6 +5828,11 @@ class Solution {
 二叉树节点的高度：指从该节点到叶子节点的最长简单路径边的条数。
 
 关于这个题，首先要了解平衡二叉树的概念，然后如果已经检测到左右子树相差大于1，剩下都是返回-1，否则返回的是正常高度。
+
+第二次做存在的问题：
+1.没有想到用一个辅助getheight函数，注意这个题是返回一个true还是false，而我们当然要用高度来判断
+2.遗忘左-右绝对值的问题
+3.需要注意如果已经不平衡的情况
 */
 class Solution {
     public boolean isBalanced(TreeNode root) {
@@ -5652,9 +5841,9 @@ class Solution {
     public int getHeight(TreeNode root) {
         if (root == null) return 0;
         int left = getHeight(root.left);
-        if (left == -1) return -1;//如果已经不平衡了，就返回-1//
         int right = getHeight(root.right);
-        if (right == -1) return -1;
+        if (left == -1) return -1;//如果已经不平衡了，就返回-1
+        if (right == -1) return -1;//如果已经不平衡了，就返回-1
         if (Math.abs(left - right) > 1) return -1;//Math.abs函数
         return 1 + Math.max(left, right);
     }
@@ -5681,7 +5870,7 @@ class Solution {
         return res;
     }
     public void preorderdfs(TreeNode root, List<String> res, List<Integer> path) {
-        path.add(root.val);
+        path.add(root.val);//容易漏
         if (root.left == null && root.right== null) {
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < path.size() - 1; i++) {
@@ -5703,6 +5892,40 @@ class Solution {
     }
 }
 ```
+全局变量的写法
+```java
+class Solution {
+    List<String> result = new ArrayList<>();//第二次居然写成List<List<String>>
+    LinkedList<Integer> path = new LinkedList<>();
+
+    public List<String> binaryTreePaths(TreeNode root) {
+        if (root == null) return result;
+        backtrack(root);
+        return result;
+    }
+    public void backtrack(TreeNode root) {
+        path.add(root.val);//第二次写漏了
+
+        if (root.left == null && root.right == null) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < path.size() - 1; i++) {
+                sb.append(path.get(i)).append("->");//不要写成sb.append(path.get(i).append("->"));append要放在外面
+            }
+            sb.append(path.get(path.size() - 1));
+            result.add(sb.toString());
+            return;
+        }
+        if (root.left != null) {
+            backtrack(root.left);
+            path.remove(path.size() - 1);
+        }
+        if (root.right != null) {
+            backtrack(root.right);
+            path.remove(path.size() - 1);
+        }
+    }
+}
+```
 ### 404 左叶子之和 easy
 有点像求深度那个题，也是左右中的顺序，不同点是判断左叶子节点。
 ```java
@@ -5717,6 +5940,28 @@ class Solution {
             mid = root.left.val;
         }
         int sum = left + right + mid;
+        return sum;
+    }
+}
+```
+```java
+/*
+迭代法，这个和层序遍历还是有一点点差别的，没有len之后进行循环，这个要注意
+*/
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        if (root == null) return 0;
+        int sum = 0;
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node.left != null && node.left.left == null && node.left.right == null) {
+                sum += node.left.val;               
+            }
+            if (node.left != null) queue.offer(node.left);
+            if (node.right != null) queue.offer(node.right);            
+        }
         return sum;
     }
 }
@@ -5752,6 +5997,7 @@ class Solution {
     }
 }
 ```
+迭代法一直没调试好while，就是类似于层序遍历
 ```java
 class Solution {
     public int findBottomLeftValue(TreeNode root) {
@@ -5759,7 +6005,7 @@ class Solution {
         queue.offer(root);
         int result = 0;
         while (!queue.isEmpty()) {
-            int len = queue.size();
+            int len = queue.size();//需要注意的是，len不用再--
             for (int i = 0; i < len; i++) {//这里用for就会简洁很多
                 TreeNode temp = queue.poll();
                 if (i == 0) result = temp.val;
@@ -5910,7 +6156,6 @@ class Solution {
     public TreeNode construct(int[] nums, int l, int r) {
         if (l > r) return null;//这里是大于
         int max_i = max(nums, l ,r);//每次递归都要重新找最大值的下标
-        System.out.println(max_i);
         TreeNode root = new TreeNode(nums[max_i]);//前序构造二叉树
         root.left = construct(nums, l , max_i - 1);//这里是-1
         root.right = construct(nums, max_i + 1, r);
@@ -6003,7 +6248,7 @@ class Solution {
     }
 }
 ```
-### 98 验证二叉搜索数 medium
+### 98 验证二叉搜索树 medium
 第二次做又忘记，二叉搜索树中序遍历是升序的，根据这个特性来完成。
 ```java
 class Solution {
@@ -7124,8 +7369,8 @@ System.out.print(Arrays.toString(res[0]));//输出是[5, 0]
 如果第一个区间是[0,100]，那么初试的右边界是100,第二个区间是[3,4],他们可以用一只箭，但是如果第三个区间是[5,6]，需要新箭了，因为[3,4]和[5,6]不重叠，不能用一只箭
 所以更新区间的策略是用最大右边界的值和当前区间的右边界值进行比较，取小的那个
 
+这个题要纵向看，如下图所示
 然后接着下一个区间，判断左边界和比最大右边区间
-
 */
 class Solution {
     public int findMinArrowShots(int[][] points) {
@@ -7152,6 +7397,7 @@ class Solution {
     }
 }
 ```
+![](/images/leetcode-java/452.jpg)
 ### 435 无重叠区间 medium
 去掉重叠的区间，[1,2],[2,3]不算重叠，然后计算需要去掉的个数。
 ```java
@@ -7164,6 +7410,8 @@ class Solution {
 开始循环，如果第二个数的左边区间小于rightedge，说明重叠了，这时候要count++，至于移除哪个，你不需要纠结，你计数即可，然后重新取右边区间
 
 可以看到，这个题和上一题的逻辑 是有点相反的！
+
+第二次做的反思：关于min的问题，这里是相交的时候取最小的右边，二个数的左边区间小于rightedge，重叠，肯定要移除一个，但是为什么保留较小的右边呢，因为如果你的rightedge很大的话，说明很多区间是可能发生重叠的，所以才是这个道理
 */
 class Solution {
     public int eraseOverlapIntervals(int[][] intervals) {
@@ -7745,7 +7993,7 @@ for (int j = 0; j <= amount; j++) { // 遍历背包容量
     }
 }
 ```
-### 组合总和Ⅳ 377
+### 377 组合总和Ⅳ medium
 这个其实是排列+完全背包问题
 ```java
 1.dp[i]: 凑成目标正整数为i的排列个数为dp[i]
@@ -8011,11 +8259,11 @@ class Solution {
         int[] dp = new int [nums.length];
         dp[start] = nums[start];//主体的逻辑也要根据start和end来写哦
         dp[start + 1] = Math.max(nums[start], nums[start + 1]);
-        for (int i = start + 2; i <= end; i++) {
+        for (int i = start + 2; i <= end; i++) {//注意小于等于end
             dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1]);
 
         }
-        return dp[end];
+        return dp[end];//注意返回的是end
     }
 }
 ```
@@ -8936,7 +9184,7 @@ class Solution {
 class Solution {
     public int trap(int[] height) {
         int sum = 0;
-        for (int i = 1; i < height.length - 1; i++) {//第一格和最后
+        for (int i = 1; i < height.length - 1; i++) {//第一格和最后一格不算
 
             int lheight = height[i];
             int rheight = height[i];
@@ -9011,15 +9259,809 @@ class Solution {
 借用别人画的图来理解如何计算面积
 比如计算5（下标是2）的最大面积
 左边小的是1（下标1），右边小的是2（下标4）
-面积就是（4-1-1）*5=10
+面积就是（4-1-1）* 5=10
 
 比如计算6（下标是3）的最大面积
 左边小的是5（下标2），右边小的是2（下标4）
-面积就是（4-2-1）*6=6
+面积就是（4-2-1）* 6=6
 
 ![](/images/leetcode-java/84.png)
-## 自己额外练习的
-### 21 合并两个有序链表 easy
+## hot100
+### 3 无重复字符的最长子串
+```java
+用一个map来保存字符
+双指针的做法
+一个start 一个end
+如果发现重复了（map中），需要重新找到start的位置，新start的位置需要这个字符在map的位置然后加1，但是start不能往回走（因为单纯加1的话，可能会回退，因为字符可能在最开始的位置），所以要在start和 这个字符在map的数字加1比较，确定新start的位置
+长度就是end-start+1,在过程中记录即可，然后把字符加入到map中
+```
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length(), ans = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int end = 0, start = 0; end < n; end++) {
+            char alpha = s.charAt(end);
+            
+            if (map.containsKey(alpha)) {
+                start = Math.max(map.get(alpha) + 1, start);
+            }
+
+            ans = Math.max(ans, end - start + 1);
+            map.put(s.charAt(end), end);
+        }
+        return ans;
+    }
+}
+```
+### 5 最长回文子串 medium
+思路挺简单的，仔细阅读下代码，用的是暴力法
+```java
+class Solution {
+    public String longestPalindrome(String s) {
+        int len = 1;
+        int begin = 0;
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j < s.length(); j++) {
+                if (j - i + 1 > len && valid(s, i, j)) {//注意这里是把整个s带进去
+                    len = j-i+1;
+                    begin = i;
+                }
+            }
+        }
+        return s.substring(begin, begin + len);
+    }
+    public boolean valid(String s, int start, int end) {       
+        for (int i = start, j = end; i < j; i++,j--) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
+            }
+        }
+        return true;   
+    }
+}
+```
+### 11 盛水最多的容器 medium
+需要和42 84一起看
+```java
+/*
+本题的思路是用双指针，一个最左边，一个最右边
+每次都是固定长的那根，然后计算面积（较短的那根*距离）
+然后每次移动比较短的那根
+*/
+class Solution {
+    public int maxArea(int[] height) {
+        int result = 0;
+        for (int i = 0; i < height.length; i++) {
+            for (int j = i + 1; j < height.length; j++) {
+                int high = Math.min(height[i], height[j]);
+                int width = j - i;
+                result = Math.max(result, high * width);
+            }
+        }
+        return result;
+    }
+}
+```
+### 128 最长连续序列 medium
+注意这个题，是指内部可以组成的连续的序列，比如1,2,3,4,5，累加1这种，但是，不是指必须他们在位置上连续，他们一开始是打乱的
+```java
+/*
+用set，因为数组是可能中间有连续一样的数字，set可以用来保留一个
+*/
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int x : nums) {
+            set.add(x);
+        }
+        int result = 0;
+        int temp = 0;
+        for (int i : nums) {
+            if (!set.contains(i - 1)) {//只有当num-1不存在时，才开始向后遍历，如果没有这句话，会超时的
+                while (set.contains(i)) {
+                    temp++;
+                    i++;//在这里进行++，因为连续嘛，比前一个数大于1就可以连续
+                }
+                result = Math.max(result, temp);
+            }
+            temp = 0;
+        }
+        return result;
+    }
+}
+```
+### 146 LRU缓存 medium
+```java
+LinkedHashMap是尾插
+
+LinkedHashMap和HashMap不一样，HashMap是无序的，前者是有序的，所以不能用hashmap来做这个题
+1.查询操作
+存在的话，先对他进行最近操作处理，然后返回值
+否则返回-1
+
+2.插入操作
+如果这个key本身存在的话，先对他进行最近操作处理，然后把value更新，并且中断操作
+如果key不存在，先判断插入的时候，是否满了，先删除头部的老节点，然后再插入
+
+最近操作处理
+先存这个value，然后删除key，然后再重新put即可
+```
+```java
+class LRUCache {
+    int capacity;
+    LinkedHashMap<Integer, Integer> cache = new LinkedHashMap<>();
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+    }
+    
+    public int get(int key) {
+        if (cache.containsKey(key)) {
+            makeRecently(key);
+            return cache.get(key);
+        }
+        return -1;
+    }
+    
+    public void put(int key, int value) {
+        if (cache.containsKey(key)) {
+            makeRecently(key);
+            cache.put(key, value);
+            return;//这个很重要，不然不能通过，否则会往下走
+        }
+        if (cache.size() == this.capacity) {
+            int oldKey = cache.keySet().iterator().next();//学习这个写法
+            cache.remove(oldKey);
+        }
+        cache.put(key, value);
+
+    }
+
+    private void makeRecently(int key) {
+        int value = cache.get(key);
+        cache.remove(key);
+        cache.put(key, value);
+
+    }
+}
+```
+### 152 乘积最大子数组 medium
+对比53题
+```java
+这题最大的不同点在于需要维护两个dp数组，一个最大的，一个最小的
+一般我们都是维护一个最大的即可，这里说下如果不维护一个最小的
+比如[-2,3,-4]
+dp[0] = -2
+dp[1] = 3
+dp[2] = 3
+但是，其实正确答案是24，因为可能中间是负数，后面是负数，就可以变成正数，但是单纯用max的话，会忽略掉中间负数的情况
+```
+```java
+class Solution {
+    public int maxProduct(int[] nums) {
+        int[] dpmax = new int[nums.length];
+        int[] dpmin = new int[nums.length];
+        //Arrays.fill(dp, 1);
+        dpmax[0] = nums[0];
+        dpmin[0] = nums[0];
+        int result = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            dpmax[i] = Math.max(Math.max(nums[i] * dpmax[i - 1], nums[i] * dpmin[i - 1]), nums[i]);
+            dpmin[i] = Math.min(Math.min(nums[i] * dpmax[i - 1], nums[i] * dpmin[i - 1]), nums[i]);
+            result = Math.max(result, dpmax[i]);
+        }
+        return result;
+    }
+}
+```
+### 136 只出现一次的数字 easy
+```java
+/*
+异或运算
+十进制下相同数字异或结果为0，数字a与0异或结果仍为原来的数字a。
+还有就是异或运算支持结合律，所以你的数组顺序是无所谓的
+计算完后剩下的就是出现那一个的数
+*/
+class Solution {
+    public int singleNumber(int[] nums) {
+        int single = 0;
+        for (int num : nums) {
+            single ^= num;
+        }
+        return single;
+    }
+}
+```
+```java
+//这个不符合题目不用额外空间的要求，但是能pass
+class Solution {
+    public int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+        }
+        for (int i : nums) {
+            if (map.get(i) == 1) {
+                return i;
+            }
+        }
+        return 0;
+
+    }
+}
+```
+### 283 移动零 easy
+注意题目要在原数组上操作
+```java
+/*
+左指针指向当前已经处理好的序列的尾部，右指针指向待处理序列的头部。
+其实第一次看这个做法，还挺奇妙的，只用了一次遍历
+可以理解为，left会指向下一个0，然后等着right找到不是0，进行交换
+*/
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int left = 0;
+        for (int right = 0; right < nums.length; right++) {
+            if (nums[right] != 0) {////当前元素!=0，就把其交换到左边，等于0的会交换到右边
+                swap(nums, left, right);
+                left++;
+            }
+        }
+    }
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp; 
+    }
+}
+```
+```java
+//这种是补0，好像和意思不太对，但是也能做
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int slow = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[slow] = nums[i];
+                slow++;
+            }
+        }
+        for (int j = slow; j < nums.length; j++) {
+            nums[j] = 0;
+        }
+    }
+}
+```
+### 169 多数元素 easy
+统计次数，用map
+```java
+class Solution {
+    public int majorityElement(int[] nums) {
+        int result = nums[0];
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+            if (map.get(i) > nums.length / 2) {
+                result = i;
+            }
+        }
+        return result;
+    }
+}
+```
+### 234 回文链表 easy
+自己写的，看
+```java
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        StringBuilder s = new StringBuilder();
+        ListNode cur = head;
+        while (cur != null) {
+            s.append(cur.val);
+            cur = cur.next;
+        }
+        String a = s.toString();
+        int j = a.length() - 1;
+        for (int i = 0; i < a.length(); i++) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
+            }
+            j--;
+        }
+        return true;
+    }
+}
+```
+### 448 找到所有数组中消失的数字 easy
+用set来保存数，然后遍历1~n，看看哪个数不在就添加
+```java
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        List<Integer> list = new LinkedList<>();
+        Set<Integer> set = new HashSet<>();
+        for (int i : nums) {
+            set.add(i);
+        }
+    
+        for (int i = 0; i < nums.length; i++) {
+            if (!set.contains(i + 1)) {
+                list.add(i + 1);
+            }
+        }
+        return list;
+    }
+}
+```
+### 287 寻找重复数 medium
+```java
+//不过不满足题目的要求
+class Solution {
+    public int findDuplicate(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int result = nums[0];
+
+        for (int i : nums) {
+            map.put(i, map.getOrDefault(i, 0) + 1);
+            if (map.get(i) > 1) {
+                result = i;
+            }
+        }
+        return result;
+
+    }
+}
+```
+### 560 和为 K 的子数组 medium
+```java
+这个解法很少见，先找到每个下标，然后从这个下标开始倒着加，如果中途满足k，就计数
+当然顺着加也可以（注释中的语句），即先固定左边界，然后枚举右边界哈，
+```
+```java
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int count = 0;
+        for (int start = 0; start < nums.length; start++) {
+            int sum = 0;
+            for (int end = start; end >= 0; end--) {//for (int end = start; end < nums.length; end++)也可以，这个我觉得更好理解，倒着来太麻烦   
+                sum += nums[end];
+                if (sum == k) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+```
+前缀和解法，前缀和就是前i个数的和，left和right区间内的前缀和相减如果等于k，就说明中间有连续数组是为k
+```java
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        int[] presum = new int[nums.length + 1];
+        presum[0] = 0;//注意第一个不算，置为0
+        for (int i = 0; i < nums.length; i++) {
+            presum[i + 1] = presum[i] + nums[i];
+        }
+        int count = 0;
+        for (int i = 0; i <= nums.length; i++) {
+            for (int j = i + 1 ; j <= nums.length; j++) {
+                if (presum[j] - presum[i] == k) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+```
+### 581 最短无序连续子数组 medium
+```java
+其实就是新建一个拍好序的数组，然后从左边遍历看第一个不正确的数，记录left
+然后从右边遍历第一个不正确的数，记录right。这里需要注意，不能用sortnum = num，因为这样操作是浅拷贝，如果你把sortnum排序了，那么num也会变的！！！！
+比如[2,6,4,8,10,9,15]，最终记录left为1，right为5，然后务必+1才是长度
+```
+```java
+class Solution {
+    public int findUnsortedSubarray(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int sortnum[] = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            sortnum[i] = nums[i];
+        }
+
+
+        Arrays.sort(sortnum);
+        while (left < nums.length && nums[left] == sortnum[left]) {
+            left++;
+        }
+        while (right > 0 && nums[right] == sortnum[right]) {
+            right--;
+        }
+
+        if (right == 0){
+            return 0;
+        }
+
+                 
+        return right - left + 1;
+    }
+}
+```
+### 461 汉明距离 easy
+单纯计算二进制，然后比较
+```java
+class Solution {
+    public int hammingDistance(int x, int y) {
+        int result = 0;
+        while (x != 0 || y != 0) {
+            if (x % 2 != y % 2) {
+                result++;
+            }
+            x = x / 2;
+            y = y / 2;
+        }
+        return result;
+    }
+}
+```
+### 2 两数相加 medium
+```java
+这个题的关键是遇到两位数的和，需要把十位上的数，累加到下一次中，举个例子
+[2,4,3]
+[5,6,7]
+他们的和是7,10,10，第二个数已经超过了10，把0保留，1留在下一个中，就是7,0,11，然后11又超过了两位数，所以把1留下，最后是7,0,1,1
+
+```
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dump = new ListNode(-1);
+        ListNode cur = dump;
+        //ListNode pre = dump;
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int x = l1 == null ? 0 : l1.val;
+            int y = l2 == null ? 0 : l2.val;
+            int sum = x + y + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            cur.next = new ListNode(sum);//这里前面不需要再声明ListNode
+            cur = cur.next;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+        if (carry == 1) {//处理最后遗留的carry，因为最大也就是相加之和为18，所以只能是1
+            cur.next = new ListNode(1);
+        }
+        return dump.next;
+    }
+}
+```
+### 338 比特位计数 easy
+很简单，计算二进制即可
+```java
+class Solution {
+    public int[] countBits(int n) {
+        int[] result = new int[n + 1];
+        for(int i = 0 ; i <= n; i++) {
+            result[i] = count(i);
+        }
+        return result;
+    }
+    public int count(int x) {
+        int sum = 0;
+        while (x != 0) {//注意条件是x != 0
+            if (x % 2 == 1) {
+                sum++;
+            }
+            x = x / 2;
+        }
+        return sum;
+    }
+```
+### 23 合并K个升序链表 hard
+思想参考21题，放在本题就是合并两两链表。
+```java
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode dump = null;
+        for (int i = 0; i < lists.length; i++) {
+            dump = mergetwoLists(dump, lists[i]); 
+        }
+        return dump;   
+    }
+    public ListNode mergetwoLists(ListNode list1, ListNode list2) {
+        //这个可要可不要
+        /*  
+        if (list1 == null || list2 == null) {
+            return list1 == null ? list2 : list1;
+        }
+        */
+        ListNode dump = new ListNode(-1);
+        ListNode cur = dump;
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                cur.next = list1;
+                list1 = list1.next;
+            } else {
+                cur.next = list2;
+                list2 = list2.next;
+            }
+            cur = cur.next;
+        }
+        cur.next = list1 == null ? list2 : list1;
+        return dump.next; 
+    }
+}
+```
+### 238 除自身以外数组的乘积 medium
+```java
+先算左侧数字累积，也就是当前元素之前元素的累积（不含当前元素）
+然后倒过来算累计，也就是当前元素之后元素的累积，在左侧数字累积的基础上相乘，这样就可以算出除自身外的累积
+总体思想也就是左侧数字的累积乘以右侧数字的累积，也就是除了这个数的累积。
+
+不能用暴力，否则超时
+
+比如[1,2,3,4]
+左侧数字累积是[1,1,2,6]
+
+算完之后用一个R来保存右侧的累积，初始化R为1
+虽然在第一轮中，4这个位置的左边已经全部算好了，但是我们需要改变R的累积来为3这个数字服务，所以倒着的时候还是先从最后一个数开始
+```
+```java
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int[] result = new int[nums.length];
+        result[0] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
+        }
+        
+        int Right = 1;//代表右侧数字的累积
+        for (int i = nums.length - 1; i >= 0; i--) {
+            result[i] = Right * result[i];
+            Right = Right * nums[i];//累积
+        }
+        return result;
+    }
+}
+```
+### 148 排序链表 medium
+和下一个方法一样的思路，但是这个方法可能好理解一点
+```java
+/*
+归并排序，可以看下面一个图
+
+切割环节：
+使用 fast,slow 快慢双指针法，奇数个节点找到中点，偶数个节点找到中心左边的节点。
+找到中点 slow 后，执行 slow.next = null 将链表切断
+递归分割时，输入当前链表左端点 head 和中心节点 slow 的下一个节点 
+cut 递归终止条件： 当head.next == None时，说明只有一个节点了，直接返回此节点
+
+merge环节：
+就是21题源代码
+
+
+如果下面写成fast = head
+传入head只有两个节点的时候，slow会指向第二个节点，此时left : head->node1->null ; right:null; 然后在ListNode left = sortList(head);这一步会发生stackoverflow
+但是如果要用fast = head
+需要把while写成while (fast != null && fast.next != null && fast.next.next != null)
+*/
+class Solution {
+    public ListNode sortList(ListNode head) {
+        // 1、递归结束条件
+        if (head == null || head.next == null) {
+            return head;
+        }
+        //  需要找到链表中间节点的前一个节点（876类似，但是又不同于876）
+        ListNode slow = head;
+        ListNode fast = head.next.next;//不能写成head，但是可以写成head.next，但是建议还是写成next.next，和下面对应
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode head2 = slow.next;
+        slow.next=null;//切割出来
+
+        return mergeTwoLists(sortList(head), sortList(head2));
+    }
+    
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {//21题原题代码
+        ListNode dump = new ListNode(-1);
+        ListNode cur = dump;
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                cur.next = list1;
+                list1 = list1.next;
+            } else {
+                cur.next = list2;
+                list2 = list2.next;
+            }
+            cur = cur.next;
+        }
+        cur.next = list1 == null ? list2 :list1;
+        return dump.next;
+    }
+}
+```
+![](/images/leetcode-java/148.png)
+```java
+/*
+归并排序方法
+*/
+class Solution {
+    public ListNode sortList(ListNode head) {
+        // 1、递归结束条件
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // 2、找到链表中间节点并断开链表 & 递归下探
+        ListNode midNode = middleNode(head);
+        ListNode rightHead = midNode.next;
+        midNode.next = null;
+
+        ListNode left = sortList(head);//递归
+        ListNode right = sortList(rightHead);//递归
+
+        // 3、当前层业务操作（合并有序链表）
+        return mergeTwoLists(left, right);
+    }
+    
+    //  需要找到链表中间节点的前一个节点（876类似，但是又不同于876）
+    public ListNode middleNode(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode slow = head;
+        ListNode fast = head.next.next;//不能写成head，但是可以写成head.next
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {//21题原代码，合并两个升序链表
+        ListNode dump = new ListNode(-1);
+        ListNode cur = dump;
+        while (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                cur.next = list1;
+                list1 = list1.next;
+            } else {
+                cur.next = list2;
+                list2 = list2.next;
+            }
+            cur = cur.next;
+        }
+        cur.next = list1 == null ? list2 :list1;
+        return dump.next;
+    }
+}
+```
+自己写的解法，思路很简单，先用Arraylist来记录数字，然后排序，这里注意是用Collections.sort(list);进行排序，而不是Arrays.sort(list)
+```java
+//不过这个不太符合题目的要求，时间和空间复杂度会很高
+class Solution {
+    public ListNode sortList(ListNode head) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int len = 0;
+        ListNode cur = head;
+        while (cur != null) {
+            list.add(cur.val);
+            cur = cur.next;
+        }
+        
+        Collections.sort(list);
+        ListNode dump = new ListNode(-1);
+        ListNode temp = dump;
+        for (int x : list) {
+            temp.next = new ListNode(x);
+            temp = temp.next;
+        }
+        return dump.next;
+    }
+}
+```
+### 200 岛屿数量 medium
+对比695
+```java
+/*
+和695非常类似，一开始我用695的方法，在判断上是只要面积大于0就加1，但是感觉有点冗余，下面是去掉了冗余的代码
+*/
+class Solution {
+    public int numIslands(char[][] grid) {
+        int result = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1') {
+                    dfs(grid, i, j);
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
+    public void dfs(char[][] grid, int cur_i, int cur_j) {
+        if (cur_i < 0 || cur_j <  0 || cur_i == grid.length || cur_j == grid[0].length || grid[cur_i][cur_j] != '1')  {
+            return;
+        }
+        grid[cur_i][cur_j] = '0';//这个很重要，把走过的格子置为0，不然会一直重复dfs
+
+        int[] next_cur_i = {0,0,1,-1};
+        int[] next_cur_j = {1,-1,0,0};
+        for (int index = 0; index < 4; index++) {
+            int next_i = cur_i + next_cur_i[index];
+            int next_j = cur_j + next_cur_j[index];
+            dfs(grid, next_i, next_j);
+        }
+    }
+}
+```
+### 208 实现Trie(前缀树) medium
+[具体看解释看](https://leetcode.cn/problems/implement-trie-prefix-tree/solution/trie-tree-de-shi-xian-gua-he-chu-xue-zhe-by-huwt/)，前缀树的用处：一次建树，多次查询
+```java
+class Trie {
+    class TrieNode {
+        private boolean isEnd;//该节点是否是一个串的结束
+        TrieNode[] next;//指向孩子节点
+
+        public TrieNode() {//初始化
+            isEnd = false;
+            next = new TrieNode[26];//字母映射表
+        }
+    }
+    private TrieNode root;//指向根，后面每次操作，都是从根开始
+
+    public Trie() {
+        root = new TrieNode();
+    }
+    
+    public void insert(String word) {//插入操作
+        TrieNode node = root;//从根开始查
+        for (char c : word.toCharArray()) {
+            if (node.next[c - 'a'] == null) {//如果没有的话，
+                node.next[c - 'a'] = new TrieNode(); //就开辟一个新的节点
+            }
+            node = node.next[c - 'a'];//插入完之后指向下一个节点
+        }
+        node.isEnd = true;//插入完之后，设置尾巴为true，表示这个词的终点
+    }
+    
+    public boolean search(String word) {//查找操作
+        TrieNode node = root;//从根开始查
+        for (char c : word.toCharArray()) {
+            node =  node.next[c - 'a'];//移动下一个节点
+            if (node == null) {//如果空的话直接返回false
+                return false;
+            }
+        }
+        return node.isEnd;//注意因为这个是查找整个单词的操作，所以是返回尾巴的isend看看是不是为true
+    }
+    
+    public boolean startsWith(String prefix) {//查找前缀
+        TrieNode node = root;//从根开始查
+        for (char c : prefix.toCharArray()) {
+            node =  node.next[c - 'a'];//移动下一个节点
+            if (node == null) {//如果空就直接返回false
+                return false;
+            }
+        }
+        return true;//注意这里只是查找前缀，所以如果全部都找完了，说明没有false，那么最终就是返回true
+    }
+}
+```
+# 额外练习
+## 21 合并两个有序链表 easy
 ```java
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
@@ -9040,7 +10082,7 @@ class Solution {
     }
 }
 ```
-### 先递增再递减数组找最大值
+## 先递增再递减数组找最大值
 别人面试碰到的题
 ```java
 /*
@@ -9077,5 +10119,112 @@ int FindMax(int *A, int m)
     if(MP == 0) return 0; //如果数组是完全递减的，则第一个值就是最大值
     if(MP == m-1) return m-1; //如果数组是完全递增的，则最后一个值为最大值
     return -1；
+}
+```
+```java
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer>set=new HashSet<>();//HashSet 基于 HashMap 来实现的，是一个不允许有重复元素的集合。
+        for(int i:nums) {
+            set.add(i);
+        }//将元素加入集合中
+        int len=0,max=0;
+        for(int i:nums) {
+            if(!set.contains(i-1)){//进行判断如果有比当前元素小的元素就直接跳过不在进行长度增长。如果不进行该操作时间会超限
+                while(set.contains(i)) {
+                    len+=1;
+                    i+=1;//取最大连续序列，就一直＋1再判断是否在序列中
+                }
+                if(len>max) {
+                    max=len;
+                }
+            }
+            len=0;
+        }
+        return max;
+    }
+}
+
+作者：cranky-gausshdx
+链接：https://leetcode.cn/problems/longest-consecutive-sequence/solution/by-cranky-gausshdx-jm5b/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+## 14 最长公共前缀 easy
+注意这个题只是看前缀，而不是共同字符，所以只在最前面开始搜就行
+```java
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String ans = strs[0];//把第一个字符串拿过来
+        for (int i = 1; i < strs.length; i++) {//然后从第二个字符串开始比较
+            int j = 0;//为什么在这里写而不是下面写？ 下面有解释
+            for( ;j < ans.length() && j < strs[i].length(); j++) {
+                if (ans.charAt(j) != strs[i].charAt(j)) {
+                    break;
+                } 
+            }
+            ans = ans.substring(0, j);//因为是前缀，所以肯定是从第一个开始，至于到了哪个是共同，就是看j
+        }
+        return ans;
+    }
+}
+```
+错误题解，用来解释的
+```java
+/*
+但是，如果下面这样写的话
+["ab", "a"]的输出结果是ab，这是错误的，正确结果应该是a，因为第二个字符串长度为1，所以只进行了一次循环后，就不循环了，也就是b这个数都无法比较，所以最终无法进入if语句
+*/
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String ans = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            for(int j = 0 ;j < ans.length() && j < strs[i].length(); j++) {//如果在这里写，那么ans.sub就要在if里面写，因为是局部变量
+                if (ans.charAt(j) != strs[i].charAt(j)) {
+                    ans = ans.substring(0, j);
+                    break;
+                } 
+            }
+        }
+        return ans;
+    }
+}
+```
+## 83 删除排序链表中的重复数字 easy
+其实很简单，为什么自己一开始想的很复杂呢？
+```java
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode dump = new ListNode(-1);
+        dump.next = head;
+        ListNode cur = head;
+        while (cur != null && cur.next != null) {
+            if (cur.val == cur.next.val) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+        return dump.next;
+    }
+}
+```
+## 88 合并两个有序数组 easy
+在尾巴处进行修改，需要注意的是，本题的nums1大小是m+n，然后最后返回的数组也是nums1
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+        while (i >= 0 && j >= 0) {
+            if (nums2[j] > nums1[i]) {
+                nums1[k--] = nums2[j--];
+            } else {
+                nums1[k--] = nums1[i--];
+            }
+        }
+        while (j >= 0) nums1[k--] = nums2[j--];//对剩下的nums2进行操作，不需要对nums1进行操作了，因为本质上是原地复制，无意义
+    }
 }
 ```
