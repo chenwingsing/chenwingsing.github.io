@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chenwingsing.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.14.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="HomeAassistant系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派HomeAssistant系列（四）NodeRed安装配置">
+<meta property="og:url" content="https://chenwingsing.github.io/2022/04/01/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89NodeRed%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="小陈同学">
+<meta property="og:description" content="HomeAassistant系列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/1.png">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/2.png">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/3.png">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/4.png">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/5.png">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/6.png">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/7.png">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/8.png">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/9.jpg">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/10.jpg">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/11.jpg">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/12.jpg">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/13.jpg">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/14.jpg">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/15.jpg">
+<meta property="og:image" content="https://chenwingsing.github.io/images/ha/4/16.jpg">
+<meta property="article:published_time" content="2022-04-01T01:06:07.000Z">
+<meta property="article:modified_time" content="2022-04-02T00:58:04.000Z">
+<meta property="article:author" content="小陈同学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenwingsing.github.io/images/ha/4/1.png">
+
+
+<link rel="canonical" href="https://chenwingsing.github.io/2022/04/01/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89NodeRed%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://chenwingsing.github.io/2022/04/01/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89NodeRed%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/","path":"2022/04/01/树莓派HomeAssistant系列（四）NodeRed安装配置/","title":"树莓派HomeAssistant系列（四）NodeRed安装配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树莓派HomeAssistant系列（四）NodeRed安装配置 | 小陈同学</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小陈同学</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书籍</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%96%B0%E5%BB%BA%E7%9B%AE%E5%BD%95nodered%EF%BC%88%E7%94%A8%E4%BA%8E%E6%98%A0%E5%B0%84docker%E4%B8%AD%E7%9A%84nodered%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">1.新建目录nodered（用于映射docker中的nodered）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-docker%E5%AE%89%E8%A3%85nodered%EF%BC%88%E6%B3%A8%E6%84%8F%E9%87%8C%E9%9D%A2%E7%9A%84%E6%9C%89%E5%88%9A%E6%89%8D%E5%88%9B%E5%BB%BA%E7%9A%84%E8%B7%AF%E5%BE%84-home-pi-nodered%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BD%A0%E6%98%AF%E5%85%B6%E4%BB%96%E8%B7%AF%E5%BE%84%EF%BC%8C%E8%AF%B7%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">2.docker安装nodered（注意里面的有刚才创建的路径&#x2F;home&#x2F;pi&#x2F;nodered，如果你是其他路径，请修改）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%89%93%E5%BC%80http-localhost-1880-%E8%BF%9B%E5%85%A5nodered%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="nav-number">3.</span> <span class="nav-text">3.打开http:&#x2F;&#x2F;localhost:1880&#x2F;进入nodered配置相关信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-HACS%E6%90%9C%E7%B4%A2nodered%E5%B9%B6%E4%B8%8B%E8%BD%BD%EF%BC%8C%E6%B3%A8%E6%84%8F%E4%B8%8B%E8%BD%BD%E5%90%8E%E8%A6%81%E9%87%8D%E5%90%AFHA%EF%BC%8C%E7%84%B6%E5%90%8E%E5%9C%A8%E9%9B%86%E6%88%90%E4%B8%AD%E5%AE%89%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">4.HACS搜索nodered并下载，注意下载后要重启HA，然后在集成中安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-HA%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%8A%A0%E5%85%A5nodered"><span class="nav-number">5.</span> <span class="nav-text">5.HA侧边栏加入nodered</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%88%9D%E4%BD%93%E9%AA%8Cnodered"><span class="nav-number">6.</span> <span class="nav-text">6.初体验nodered</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小陈同学</p>
+  <div class="site-description" itemprop="description">求知若饥，虚心若愚，虚化若谷</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/chenwingsing" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;chenwingsing" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:chen-yongcheng@outlook.com" title="E-Mail → mailto:chen-yongcheng@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://chenwingsing.github.io/2022/04/01/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89NodeRed%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小陈同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小陈同学">
+      <meta itemprop="description" content="求知若饥，虚心若愚，虚化若谷">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="树莓派HomeAssistant系列（四）NodeRed安装配置 | 小陈同学">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树莓派HomeAssistant系列（四）NodeRed安装配置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-01 09:06:07" itemprop="dateCreated datePublished" datetime="2022-04-01T09:06:07+08:00">2022-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-04-02 08:58:04" itemprop="dateModified" datetime="2022-04-02T08:58:04+08:00">2022-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/HomeAassistant/" itemprop="url" rel="index"><span itemprop="name">HomeAassistant</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>HomeAassistant系列</p>
+<span id="more"></span>
+<p>Nodered是为了方便实现自动化的一个工具，所以用在HA上很有必要。</p>
+<h2 id="1-新建目录nodered（用于映射docker中的nodered）"><a href="#1-新建目录nodered（用于映射docker中的nodered）" class="headerlink" title="1.新建目录nodered（用于映射docker中的nodered）"></a>1.新建目录nodered（用于映射docker中的nodered）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /home/pi/nodered</span><br></pre></td></tr></table></figure>
+<h2 id="2-docker安装nodered（注意里面的有刚才创建的路径-home-pi-nodered，如果你是其他路径，请修改）"><a href="#2-docker安装nodered（注意里面的有刚才创建的路径-home-pi-nodered，如果你是其他路径，请修改）" class="headerlink" title="2.docker安装nodered（注意里面的有刚才创建的路径&#x2F;home&#x2F;pi&#x2F;nodered，如果你是其他路径，请修改）"></a>2.docker安装nodered（注意里面的有刚才创建的路径&#x2F;home&#x2F;pi&#x2F;nodered，如果你是其他路径，请修改）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -it -d -p 1880:1880 --name=nodered --restart=always --user=root --net=host -v /home/pi/nodered:/data -e TZ=Asia/Shanghai nodered/node-red</span><br></pre></td></tr></table></figure>
+<h2 id="3-打开http-localhost-1880-进入nodered配置相关信息"><a href="#3-打开http-localhost-1880-进入nodered配置相关信息" class="headerlink" title="3.打开http://localhost:1880/进入nodered配置相关信息"></a>3.打开<a target="_blank" rel="noopener" href="http://localhost:1880/%E8%BF%9B%E5%85%A5nodered%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF">http://localhost:1880/进入nodered配置相关信息</a></h2><p><img src="/images/ha/4/1.png"><br>搜索node-red-contrib-home-assistant-websocket并安装<br><img src="/images/ha/4/2.png"><br>此时左边栏会出现home-assistant相关的节点，随便拉一个出来先<br><img src="/images/ha/4/3.png"><br>然后鼠标左键编辑这个节点，会出现这个界面（因为我已经配置好才出现HomeAssistant），选择添加新的server节点并编辑。<br><img src="/images/ha/4/4.png"><br>然后编辑好红框的信息，BaseUrl就是你的HA地址。<br><img src="/images/ha/4/5.png"><br>Access Token在HA的这里获取，点击创建令牌，然后复制令牌到Access Token，并点击更新。<br><img src="/images/ha/4/6.png"><br>最后请部署！请部署！请部署！全面在工作区部署所有内容！！！！！<br><img src="/images/ha/4/7.png"><br>然后我们可以找到HA中的实体。<br><img src="/images/ha/4/8.png"></p>
+<h2 id="4-HACS搜索nodered并下载，注意下载后要重启HA，然后在集成中安装"><a href="#4-HACS搜索nodered并下载，注意下载后要重启HA，然后在集成中安装" class="headerlink" title="4.HACS搜索nodered并下载，注意下载后要重启HA，然后在集成中安装"></a>4.HACS搜索nodered并下载，注意下载后要重启HA，然后在集成中安装</h2><h2 id="5-HA侧边栏加入nodered"><a href="#5-HA侧边栏加入nodered" class="headerlink" title="5.HA侧边栏加入nodered"></a>5.HA侧边栏加入nodered</h2><p>在configuration.yaml中填写以下信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">panel_iframe:</span><br><span class="line"> nodered:</span><br><span class="line">   title: &#x27;Node-Red&#x27;</span><br><span class="line">   icon: &#x27;mdi:shuffle-variant&#x27;</span><br><span class="line">   #填写node-red的地址</span><br><span class="line">   url: &#x27;http://192.168.31.134:1880/&#x27;</span><br></pre></td></tr></table></figure>
+<p>全部安装配置大功告成！</p>
+<h2 id="6-初体验nodered"><a href="#6-初体验nodered" class="headerlink" title="6.初体验nodered"></a>6.初体验nodered</h2><p>现在我要创建一个自动化，当实时室外温度小于18°时，我的小爱音箱自动播报：天气冷了，记得加衣服。反之，如果大于等于18°，则播报：天气热了，记得脱衣服。<br>ps：需要安装好和风天气和小爱音箱<br>下面这是总览图<br>整体逻辑是首先检测到实体的状态，然后进行判断，最后做出相应动作<br><img src="/images/ha/4/9.jpg"><br>室外温度状态设置，红框表示我设置的，其他地方是默认，因为图片太长，分两张上传<br><img src="/images/ha/4/10.jpg"><br><img src="/images/ha/4/11.jpg"><br>当前实体状态，可以用来作为判断条件，这里是写室外温度小于28度，注意这里还没进行判断<br><img src="/images/ha/4/12.jpg"><br>那么是怎么判断的，我们看这个图，橙色小点写if state is true，我们上面那张图写的是温度小于28度，也就是当这个条件是成立的，那么就是true<br><img src="/images/ha/4/13.jpg"><br>然后再看下面这个橙色点，写的是if state is false，对应成的话就是当温度不小于18度，这时候状态就是false，因为我们一开始设置的状态就是低于18度，所以你如果高于或者等于18度，这个状态就不成立了，不成立的意思就是false<br><img src="/images/ha/4/14.jpg"><br>触发服务：这个是对应低于18度的服务，其中红框中的信息，你只要搜索相应字母就会显示出来（只要你配置好，他就会搜索到你HA中的信息），然后点击蓝色框框的load_example_data，绿色框框就会马上给你一个模板，然后输入对应信息即可，反之另外一个服务只需要复制一个，然后修改下对应数据即可<br><img src="/images/ha/4/15.jpg"><br>最后把这几个服务拉起来连接，然后部署即可，这时候在HA中就会有这个实体！<br><img src="/images/ha/4/16.jpg"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>小陈同学
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://chenwingsing.github.io/2022/04/01/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89NodeRed%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="树莓派HomeAssistant系列（四）NodeRed安装配置">https://chenwingsing.github.io/2022/04/01/树莓派HomeAssistant系列（四）NodeRed安装配置/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/18/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E4%B8%89%EF%BC%89%E5%A4%A9%E6%B0%94%EF%BC%8C%E9%82%AE%E7%AE%B1%EF%BC%8CRSS%E8%AE%A2%E9%98%85%EF%BC%8C%E8%87%AA%E5%8A%A8%E5%8C%96-%E6%AF%8F%E6%97%A5%E5%A4%A9%E6%B0%94%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92%EF%BC%8CRSS%E9%80%9A%E7%9F%A5/" rel="prev" title="树莓派HomeAssistant系列（三）天气，邮箱，RSS订阅，自动化(每日天气邮件提醒，RSS通知)">
+                  <i class="fa fa-chevron-left"></i> 树莓派HomeAssistant系列（三）天气，邮箱，RSS订阅，自动化(每日天气邮件提醒，RSS通知)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/14/MySql%E7%AC%94%E8%AE%B0/" rel="next" title="MySql笔记">
+                  MySql笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小陈同学</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://unpkg.com/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

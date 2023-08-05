@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chenwingsing.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.14.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="别让你的树莓派吃灰！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派不吃灰行动">
+<meta property="og:url" content="https://chenwingsing.github.io/2021/12/27/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8D%E5%90%83%E7%81%B0%E8%A1%8C%E5%8A%A8/index.html">
+<meta property="og:site_name" content="小陈同学">
+<meta property="og:description" content="别让你的树莓派吃灰！">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-27T13:33:20.000Z">
+<meta property="article:modified_time" content="2022-07-16T11:27:24.000Z">
+<meta property="article:author" content="小陈同学">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://chenwingsing.github.io/2021/12/27/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8D%E5%90%83%E7%81%B0%E8%A1%8C%E5%8A%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://chenwingsing.github.io/2021/12/27/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8D%E5%90%83%E7%81%B0%E8%A1%8C%E5%8A%A8/","path":"2021/12/27/树莓派不吃灰行动/","title":"树莓派不吃灰行动"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树莓派不吃灰行动 | 小陈同学</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小陈同学</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书籍</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%8F%91ip%E5%88%B0%E9%82%AE%E7%AE%B1"><span class="nav-number">1.</span> <span class="nav-text">1.开机自动发ip到邮箱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="nav-number">2.</span> <span class="nav-text">2.内网穿透</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Docker"><span class="nav-number">3.</span> <span class="nav-text">3.Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker%E5%AE%89%E8%A3%85"><span class="nav-number">3.1.</span> <span class="nav-text">Docker安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-compose%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.</span> <span class="nav-text">docker-compose安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#portainer%E5%AE%89%E8%A3%85-%E5%8F%AF%E8%A7%86%E5%8C%96%E7%AE%A1%E7%90%86%E9%95%9C%E5%83%8F"><span class="nav-number">3.3.</span> <span class="nav-text">portainer安装(可视化管理镜像)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF"><span class="nav-number">3.4.</span> <span class="nav-text">青龙面板</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HomeAssistant-HA"><span class="nav-number">4.</span> <span class="nav-text">HomeAssistant(HA)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">4.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="nav-number">4.2.</span> <span class="nav-text">内网穿透</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="nav-number">4.3.</span> <span class="nav-text">文件管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98"><span class="nav-number">4.4.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2Lovelace"><span class="nav-number">4.5.</span> <span class="nav-text">更换Lovelace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nodered"><span class="nav-number">4.6.</span> <span class="nav-text">nodered</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小陈同学</p>
+  <div class="site-description" itemprop="description">求知若饥，虚心若愚，虚化若谷</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/chenwingsing" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;chenwingsing" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:chen-yongcheng@outlook.com" title="E-Mail → mailto:chen-yongcheng@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://chenwingsing.github.io/2021/12/27/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8D%E5%90%83%E7%81%B0%E8%A1%8C%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小陈同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小陈同学">
+      <meta itemprop="description" content="求知若饥，虚心若愚，虚化若谷">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="树莓派不吃灰行动 | 小陈同学">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树莓派不吃灰行动
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-27 21:33:20" itemprop="dateCreated datePublished" datetime="2021-12-27T21:33:20+08:00">2021-12-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-16 19:27:24" itemprop="dateModified" datetime="2022-07-16T19:27:24+08:00">2022-07-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8D%A3%E9%BC%93%E6%A0%91%E8%8E%93%E6%B4%BE/" itemprop="url" rel="index"><span itemprop="name">捣鼓树莓派</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>别让你的树莓派吃灰！</p>
+<span id="more"></span>
+<h1 id="1-开机自动发ip到邮箱"><a href="#1-开机自动发ip到邮箱" class="headerlink" title="1.开机自动发ip到邮箱"></a>1.开机自动发ip到邮箱</h1><h1 id="2-内网穿透"><a href="#2-内网穿透" class="headerlink" title="2.内网穿透"></a>2.内网穿透</h1><h1 id="3-Docker"><a href="#3-Docker" class="headerlink" title="3.Docker"></a>3.Docker</h1><h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -fsSL https://get.docker.com -o get-docker.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh get-docker.sh</span><br></pre></td></tr></table></figure>
+<h2 id="docker-compose安装"><a href="#docker-compose安装" class="headerlink" title="docker-compose安装"></a>docker-compose安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y python python-pip</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libffi-dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip3 install docker-compose -i https://pypi.mirrors.ustc.edu.cn/simple/  --trusted-host  pypi.mirrors.ustc.edu.cn</span><br></pre></td></tr></table></figure>
+<h2 id="portainer安装-可视化管理镜像"><a href="#portainer安装-可视化管理镜像" class="headerlink" title="portainer安装(可视化管理镜像)"></a>portainer安装(可视化管理镜像)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull portainer/portainer-ce</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock --restart=always --name portainer portainer/portainer-ce</span><br></pre></td></tr></table></figure>
+<p>更新portainer</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop portainer</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm portainer</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull portainer/portainer-ce:latest</span><br></pre></td></tr></table></figure>
+
+<h2 id="青龙面板"><a href="#青龙面板" class="headerlink" title="青龙面板"></a>青龙面板</h2><ol>
+<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit \</span><br><span class="line">-v /home/pi/qinglong/ql/config:/ql/config \</span><br><span class="line">-v /home/pi/qinglong/ql/log:/ql/log \</span><br><span class="line">-v /home/pi/qinglong/ql/db:/ql/db \</span><br><span class="line">-v /home/pi/qinglong/ql/repo:/ql/repo \</span><br><span class="line">-v /home/pi/qinglong/ql/raw:/ql/raw \</span><br><span class="line">-v /home/pi/qinglong/ql/scripts:/ql/scripts \</span><br><span class="line">-v /home/pi/qinglong/ql/jbot:/ql/jbot \</span><br><span class="line">-p 5700:5700 \</span><br><span class="line">--name qinglong \</span><br><span class="line">--hostname qinglong \</span><br><span class="line">--restart unless-stopped \</span><br><span class="line">whyour/qinglong:latest</span><br></pre></td></tr></table></figure></li>
+<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接拉库即可</span><br></pre></td></tr></table></figure>
+3.<a target="_blank" rel="noopener" href="https://plogin.m.jd.com/login/login?appid=828&returnurl=https://bean.m.jd.com/bean/signIndex.action">京东获取cookie</a><br>4.环境变量设置JD_COOKIE<br>5.<a target="_blank" rel="noopener" href="https://www.notion.so/1c598629675145988b43a37998a1604a">教程合集</a></li>
+</ol>
+<h1 id="HomeAssistant-HA"><a href="#HomeAssistant-HA" class="headerlink" title="HomeAssistant(HA)"></a>HomeAssistant(HA)</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用docker进行安装，其中&#x2F;home&#x2F;pi&#x2F;home-assistant修改为您的路径 network设置为bridge</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name homeassistant \</span><br><span class="line">  -p 8123:8123 \</span><br><span class="line">  --privileged \</span><br><span class="line">  --restart=unless-stopped \</span><br><span class="line">  -e TZ=Asia/Shanghai \</span><br><span class="line">  -v /home/pi/home-assistant:/config \</span><br><span class="line">  --network=bridge \</span><br><span class="line">  ghcr.io/home-assistant/raspberrypi4-homeassistant:stable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name homeassistant \</span><br><span class="line">  -p 8123:8123 \</span><br><span class="line">  --privileged \</span><br><span class="line">  --restart=unless-stopped \</span><br><span class="line">  -e TZ=Asia/Shanghai \</span><br><span class="line">  -v /home/pi/homeassistant:/config \</span><br><span class="line">  --network=host \</span><br><span class="line">  ghcr.io/home-assistant/raspberrypi4-homeassistant:stable</span><br></pre></td></tr></table></figure>
+<p>vlc</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install vlc</span><br><span class="line">vlc -I telnet --telnet-host 192.168.XX.XX --telnet-port 4212 --telnet-password XXXX</span><br></pre></td></tr></table></figure>
+<p>集成搜索VLC media player Telnet</p>
+<h2 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h2><p>直接用cpolar穿透会有问题，需要修改configuration.yaml，添加以下信息，其中172.17.0.1是docker中bridge的Gateway，在portainer中很容易能找到这个地址。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http:</span><br><span class="line">  use_x_forwarded_for: true</span><br><span class="line">  trusted_proxies:</span><br><span class="line">    - 172.17.0.1</span><br></pre></td></tr></table></figure>
+<p>修改完毕后输入以下命令即可使用内网穿透，这样外网也能访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpolar http 8123</span><br></pre></td></tr></table></figure>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p>发现一个不错的文件管理插件,<a target="_blank" rel="noopener" href="https://github.com/shaonianzhentan/ha_file_explorer">下载地址</a>.<br>把里面的ha_file_explorer-master\custom_components\ha_file_explorer中的这个文件夹移到HA的custom_components中，重启HA，然后<a target="_blank" rel="noopener" href="https://my.home-assistant.io/redirect/config_flow_start/?domain=ha_file_explorer">点击此链接配置</a></p>
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>更换主题和更换UI前提需要安装HomeAssistant的HACS，HACS有主题和UI下载，下载主题完毕后修改configuration.yaml，添加以下信息后重启HA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frontend:</span><br><span class="line">  themes: !include_dir_merge_named themes</span><br></pre></td></tr></table></figure>
+<p>重启完毕后在左下角选择用户资料，也就是通知下面那个栏目，右边有主题选择，此时会出现你下载你主题。</p>
+<h2 id="更换Lovelace"><a href="#更换Lovelace" class="headerlink" title="更换Lovelace"></a>更换Lovelace</h2><p>下载完毕后，编辑卡片，选择代码编辑器，默认为type: entities，此时你只需要查看你新的Lovelace名字，比如custom:mini-graph-card，把entities改成这个名字就可以了，更多设置请查看该Lovelace的文档。</p>
+<h2 id="nodered"><a href="#nodered" class="headerlink" title="nodered"></a>nodered</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -it -p 1880:1880 --name=nodered --restart=always --user=root --net=host -v /data/nodered:/data -e TZ=Asia/Shanghai nodered/node-red</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>小陈同学
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://chenwingsing.github.io/2021/12/27/%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8D%E5%90%83%E7%81%B0%E8%A1%8C%E5%8A%A8/" title="树莓派不吃灰行动">https://chenwingsing.github.io/2021/12/27/树莓派不吃灰行动/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/12/%E5%A4%A9%E6%B4%A5%E5%A4%A7%E9%9B%AA/" rel="prev" title="天津大雪">
+                  <i class="fa fa-chevron-left"></i> 天津大雪
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/01/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E9%9B%B6%EF%BC%89Docker%E5%AE%89%E8%A3%85/" rel="next" title="树莓派HomeAssistant系列（零）Docker安装">
+                  树莓派HomeAssistant系列（零）Docker安装 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小陈同学</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://unpkg.com/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

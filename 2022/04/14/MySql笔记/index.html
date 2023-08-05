@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"chenwingsing.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.14.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="记录极客时间《MySql实战45讲》中的一些笔记。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql笔记">
+<meta property="og:url" content="https://chenwingsing.github.io/2022/04/14/MySql%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="小陈同学">
+<meta property="og:description" content="记录极客时间《MySql实战45讲》中的一些笔记。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chenwingsing.github.io/images/mysql/logic.jpg">
+<meta property="article:published_time" content="2022-04-14T07:21:22.000Z">
+<meta property="article:modified_time" content="2022-07-30T13:15:46.000Z">
+<meta property="article:author" content="小陈同学">
+<meta property="article:tag" content="MySql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenwingsing.github.io/images/mysql/logic.jpg">
+
+
+<link rel="canonical" href="https://chenwingsing.github.io/2022/04/14/MySql%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://chenwingsing.github.io/2022/04/14/MySql%E7%AC%94%E8%AE%B0/","path":"2022/04/14/MySql笔记/","title":"MySql笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MySql笔记 | 小陈同学</title>
+  
+
+
+
+
+
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小陈同学</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-books"><a href="/books/" rel="section"><i class="fa fa-book fa-fw"></i>书籍</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2-%E4%B8%80%E6%9D%A1SQL%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">第一讲 一条SQL查询语句是如何执行的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%AE%B2-%E4%B8%80%E6%9D%A1SQL%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">第二讲 一条SQL更新语句是如何执行的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%AE%B2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E6%94%B9%E4%BA%86%E6%88%91%E8%BF%98%E7%9C%8B%E4%B8%8D%E8%A7%81%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">第三讲 为什么你改了我还看不见？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8A%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">第四讲 深入浅出索引（上）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%AE%B2-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E7%B4%A2%E5%BC%95%EF%BC%88%E4%B8%8B%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">第五讲 深入浅出索引（下）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E8%AE%B2-%E5%85%A8%E5%B1%80%E9%94%81%E5%92%8C%E8%A1%A8%E9%94%81%EF%BC%9A%E7%BB%99%E8%A1%A8%E5%8A%A0%E4%B8%AA%E5%AD%97%E6%AE%B5%E6%80%8E%E4%B9%88%E6%9C%89%E8%BF%99%E4%B9%88%E5%A4%9A%E9%98%BB%E7%A2%8D%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">第六讲 全局锁和表锁：给表加个字段怎么有这么多阻碍？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E8%AE%B2-%E8%A1%8C%E9%94%81%E5%8A%9F%E8%BF%87%EF%BC%9A%E6%80%8E%E4%B9%88%E5%87%8F%E5%B0%91%E8%A1%8C%E9%94%81%E5%AF%B9%E6%80%A7%E8%83%BD%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">第七讲 行锁功过：怎么减少行锁对性能的影响？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E8%AE%B2-%E4%BA%8B%E5%8A%A1%E5%88%B0%E5%BA%95%E6%98%AF%E9%9A%94%E7%A6%BB%E7%9A%84%E8%BF%98%E6%98%AF%E4%B8%8D%E9%9A%94%E7%A6%BB%E7%9A%84%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">第八讲 事务到底是隔离的还是不隔离的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E8%AE%B2-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%E5%92%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%BA%94%E8%AF%A5%E6%80%8E%E4%B9%88%E9%80%89%E6%8B%A9"><span class="nav-number">9.</span> <span class="nav-text">第九讲 普通索引和唯一索引，应该怎么选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E8%AE%B2-MySQL%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E4%BC%9A%E9%80%89%E9%94%99%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">10.</span> <span class="nav-text">第十讲 MySQL为什么有时候会选错索引？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%80%8E%E4%B9%88%E7%BB%99%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E6%AE%B5%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">第十一讲 怎么给字符串字段加索引？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%8C%E8%AE%B2-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E7%9A%84MySQL%E4%BC%9A%E6%8A%96%E4%B8%80%E4%B8%8B%EF%BC%9F"><span class="nav-number">12.</span> <span class="nav-text">第十二讲 为什么我的MySQL会抖一下？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%89%E8%AE%B2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A1%A8%E6%95%B0%E6%8D%AE%E5%88%A0%E6%8E%89%E4%B8%80%E5%8D%8A%EF%BC%8C%E8%A1%A8%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E4%B8%8D%E5%8F%98%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">第十三讲 为什么表数据删掉一半，表文件大小不变？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-count-%E8%BF%99%E4%B9%88%E6%85%A2%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">第十四讲 count(*)这么慢，我该怎么办？</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">小陈同学</p>
+  <div class="site-description" itemprop="description">求知若饥，虚心若愚，虚化若谷</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/chenwingsing" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;chenwingsing" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:chen-yongcheng@outlook.com" title="E-Mail → mailto:chen-yongcheng@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://chenwingsing.github.io/2022/04/14/MySql%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="小陈同学">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小陈同学">
+      <meta itemprop="description" content="求知若饥，虚心若愚，虚化若谷">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MySql笔记 | 小陈同学">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySql笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-14 15:21:22" itemprop="dateCreated datePublished" datetime="2022-04-14T15:21:22+08:00">2022-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-07-30 21:15:46" itemprop="dateModified" datetime="2022-07-30T21:15:46+08:00">2022-07-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>记录极客时间《MySql实战45讲》中的一些笔记。</p>
+<span id="more"></span> 
+<p><img src="/images/mysql/logic.jpg" alt="MySql的逻辑架构图"><br>MySql的逻辑架构图</p>
+<h1 id="第一讲-一条SQL查询语句是如何执行的？"><a href="#第一讲-一条SQL查询语句是如何执行的？" class="headerlink" title="第一讲 一条SQL查询语句是如何执行的？"></a>第一讲 一条SQL查询语句是如何执行的？</h1><p>1.当一个表进行更新的时候，跟这个表有关的查询缓存就会失效。<br>2.mysql占用内存快，可以定期断开长连接，这样资源可以释放出来，或者每次进行一个大操作后，通过执行mysql_reset_connection来重新初始化资源。</p>
+<h1 id="第二讲-一条SQL更新语句是如何执行的？"><a href="#第二讲-一条SQL更新语句是如何执行的？" class="headerlink" title="第二讲 一条SQL更新语句是如何执行的？"></a>第二讲 一条SQL更新语句是如何执行的？</h1><p>1.redo log（重做日志）是InnoDB（Mysql引擎之一）特有的，binlog（归档日志）是Server层的，任何引擎都能用。<br>2.redo log是物理日志，binlog是逻辑日志。<br>3.redo log是循环写的，会覆盖。binlog是可以追加写入，不会覆盖。<br>4.两阶段提交可以保证数据恢复是逻辑的一样的。<br>本讲问题：在什么场景下，一天一备会比一周一备更有优势，或者说，它影响了这个数据库系统的哪个指标？</p>
+<h1 id="第三讲-为什么你改了我还看不见？"><a href="#第三讲-为什么你改了我还看不见？" class="headerlink" title="第三讲 为什么你改了我还看不见？"></a>第三讲 为什么你改了我还看不见？</h1><p>1.事务具有原子性，一致性，隔离性，持久性。<br>2.SQL标准事务隔离级别：读未提交，读提交，可重复读，串行化。<br>3.当数据库多个事务同时执行时，可能出现脏读，不可重复读，幻读的问题。<br>4.尽量不要使用长事务，不然占用资源，最终拖垮整个库。误用长事务具体看第三讲。<br>本讲问题：你是数据库负责人，你会怎么避免或者处理长事务这种情况？</p>
+<h1 id="第四讲-深入浅出索引（上）"><a href="#第四讲-深入浅出索引（上）" class="headerlink" title="第四讲 深入浅出索引（上）"></a>第四讲 深入浅出索引（上）</h1><p>1.索引分为主键索引和普通索引，在应用中应该尽量使用主键查询。<br>2.InnoDB选择用B+树结构，可以配合磁盘的读写特性，减少单次查询磁盘访问的次数。<br>3.本讲最后是如何避免长事务对业务的影响。<br>本讲问题：对于上面例题的两个重建索引的作法，说出你的理解，或者你觉得有什么不合适的吗？</p>
+<h1 id="第五讲-深入浅出索引（下）"><a href="#第五讲-深入浅出索引（下）" class="headerlink" title="第五讲 深入浅出索引（下）"></a>第五讲 深入浅出索引（下）</h1><p>1.数据库索引的概念包括：覆盖索引，前缀索引，索引下推。其中覆盖索引可以减少树的搜索次数，显著提示查询性能，是一个常用的优化手段。<br>2.满足语句需求的情况下，尽量少访问资源是数据库设计的重要原则之一。<br>3.建立联合索引时，如何安排索引内的字段顺序，第一原则是如果通过调整顺序可以少维护一个索引，那么这个顺序是优先考虑的。<br>本讲问题：这个例题，两个索引都是否是必须的，为什么？</p>
+<h1 id="第六讲-全局锁和表锁：给表加个字段怎么有这么多阻碍？"><a href="#第六讲-全局锁和表锁：给表加个字段怎么有这么多阻碍？" class="headerlink" title="第六讲 全局锁和表锁：给表加个字段怎么有这么多阻碍？"></a>第六讲 全局锁和表锁：给表加个字段怎么有这么多阻碍？</h1><p>1.MySql的锁大致分为全局锁，表级锁，行锁三类。<br>2.表级锁又分为：表锁，元数据锁。<br>3.全局锁主要用在逻辑备份过程中，表锁一般是在数据库引擎不支持行锁的时候才会被用到。<br>4.MDL（元数据锁）会直到事务提交才释放，在做表结构变更的时候，一定小心不要导致锁住线上查询和更新。<br>5.DML:增修改数据 DDL：修改表结构<br>本讲问题：备份一般在备库上进行，你在用-single-transaction方法做逻辑备份的过程中，如果主库上一个小表做了一个DDL，这时候从备库上会看到什么现象。</p>
+<h1 id="第七讲-行锁功过：怎么减少行锁对性能的影响？"><a href="#第七讲-行锁功过：怎么减少行锁对性能的影响？" class="headerlink" title="第七讲 行锁功过：怎么减少行锁对性能的影响？"></a>第七讲 行锁功过：怎么减少行锁对性能的影响？</h1><p>1.InnoDB支持行锁，MyISAM不支持，不支持行锁，一个表任何一个时刻只能由一个更新进行，会影响业务并发度。<br>2.两阶段锁协议：在InnoDB事务中，行锁是在需要的时候才加上的，但并不是不是需要了就立刻释放，而是要等到事务结束时才释放。<br>3.如果你的事务中需要锁多个行，要把最可能造成锁冲突，最可能影响并发度的锁尽量往后面放。<br>4.发生死锁的解决方案：1.直接进入等待，直到超时。2.主动发起死锁检测。<br>5.死锁检测在热点行更新会导致利用大量资源的解决方法：1.临时把死锁检测关掉，但是有风险。2.控制并发度，但是如果客户端很多，也是很耗资源，所以并发控制可以在数据库服务端做，可以考虑用中间件实现，或者有大牛修改MySQL源码，总之基本思路是：对于相同行的更新，在进入引擎之前排队。如果没有大牛，可以将一行改成多行的逻辑，比如电影院的账户总额等于10个记录的值，每次随机给一条记录添加，这样冲突的概率为1&#x2F;10，但是你还要考虑如果有人发生退票，一部分记录会变成0，你要对代码有特殊处理。<br>本讲问题：关于删除表前面1000行数据，这三个方法你选择哪个，为什么？</p>
+<h1 id="第八讲-事务到底是隔离的还是不隔离的？"><a href="#第八讲-事务到底是隔离的还是不隔离的？" class="headerlink" title="第八讲 事务到底是隔离的还是不隔离的？"></a>第八讲 事务到底是隔离的还是不隔离的？</h1><p>这篇文章需要好好消化，举例了一个具体的操作，关于事务隔离时候的情况。<br>1.InnoDB的行数据有多个版本，每个数据版本都有自己的row trx_id，每个事务或者语句有自己的一致性视图。<br>2.普通查询语句是一致性读，一致性读会根据row trx_id和一致性视图确定数据版本的可见性。<br>3.对于可重复读，查询只承认在事务启动前就已经提交完成的数据。<br>4.对于读提交，查询只承认在语句启动前就已经提交完成的数据。<br>5.而当前读，总是读取已经提交完成的最新版本。<br>6.MySQL中，有两个视图的概念，1.一个是view,它是一个用查询语句定义的虚拟表，在调用的时候执行查询语句并生成结果。创建视图的语法是create view…，而他的查询方法与表一样。2.另一个是InnoDB在实现MVCC时用到的一致性读视图即consistent read view用于支持RC（read committed，读提交）和RR（repeatable read，可重复读）隔离级别的实现。<br>7.更新数据都是先读后写的，而这个读，只能读当前的值，称为当前读（current read）。<br>本讲问题：一个具体的业务操作出现的问题，具体看原文。</p>
+<h1 id="第九讲-普通索引和唯一索引，应该怎么选择"><a href="#第九讲-普通索引和唯一索引，应该怎么选择" class="headerlink" title="第九讲 普通索引和唯一索引，应该怎么选择"></a>第九讲 普通索引和唯一索引，应该怎么选择</h1><p>1.身份证号字段比较大，不建议直接当主键，可以当唯一索引，因为这个业务代码上保证了不会写入重复的身份证号。<br>2.普通索引和唯一索引其实性能上差距不大，但是他们对更新语句性能有影响，但是非常小，只是在于一个判断。<br>3.change buffer只限于在普通索引下，不太适合唯一索引。<br>4.redo log主要是节省随机写磁盘的IO消耗（转成顺序写），而change buffer主要节省随机读磁盘的IO消耗。<br>本讲问题：change buffer一开始是写内存，如果这个时候机器掉电重启，会不会导致change buffer丢失？</p>
+<h1 id="第十讲-MySQL为什么有时候会选错索引？"><a href="#第十讲-MySQL为什么有时候会选错索引？" class="headerlink" title="第十讲 MySQL为什么有时候会选错索引？"></a>第十讲 MySQL为什么有时候会选错索引？</h1><p>1.优化器选择索引的目的是为了找到一个最优的方案，但是有时候会判断错误从而选错索引。<br>2.如何让优化器真正选择好的索引：1.我们可以采用force index强行选择一个索引。2.或者修改语句，引导MySql使用我们期待的索引。3.在有些场景下，可以新建一个更合适的索引，或者删掉误用的索引。<br>本讲问题：具体看文章，是本文例子的扩展问题。</p>
+<h1 id="第十一讲-怎么给字符串字段加索引？"><a href="#第十一讲-怎么给字符串字段加索引？" class="headerlink" title="第十一讲 怎么给字符串字段加索引？"></a>第十一讲 怎么给字符串字段加索引？</h1><p>1.使用前缀索引，定义好长度，就可以做到既节省空间，又不用额外增加太多的查询成本。<br>2.使用前缀索引就用不上覆盖索引对查询性能的优化，这一点则需要我们考虑是否使用前缀索引。<br>3.倒序存储，再创建前缀索引，用于绕过字符串本身前缀的区分度不够的问题，比如身份证。<br>4.创建hash字段索引，查询性能稳定，有额外的存储和计算消耗，和倒序存储一样均不支持范围扫描。<br>本讲问题：维护一个学生信息库，如何设计登录名的索引，这是算实战题，得好好看。</p>
+<h1 id="第十二讲-为什么我的MySQL会抖一下？"><a href="#第十二讲-为什么我的MySQL会抖一下？" class="headerlink" title="第十二讲 为什么我的MySQL会抖一下？"></a>第十二讲 为什么我的MySQL会抖一下？</h1><p>1.因为InnoDB在后台刷脏页，也就是将内存写入磁盘，所以无论是因为你的查询语句需要内存的时候可能要求淘汰一个脏页，还是由于刷脏页的逻辑会占用IO资源影响到更新语句，都可能会让MySQL抖一下。<br>本讲问题：一个内存配置为128GB. innodb io_ capacity设 置为20000的大规格实例，正常会建议你将redolog设置成4个1GB的文件。但如果你在配置的时候不慎将redo log设置成了1个100M的文件，会发生什么情况呢?又为什么会出现这种情况呢？</p>
+<h1 id="第十三讲-为什么表数据删掉一半，表文件大小不变？"><a href="#第十三讲-为什么表数据删掉一半，表文件大小不变？" class="headerlink" title="第十三讲 为什么表数据删掉一半，表文件大小不变？"></a>第十三讲 为什么表数据删掉一半，表文件大小不变？</h1><p>1.建议设置innodb_file_per_table为on，表示每个InnoDB表数据存储在一个以.ibd为后缀的文件中。<br>2.如果上面说的参数设置为off，表的数据会放在系统共享表空间，这时候如果我们删掉表，空间是不会回收的，而如果是上面的on，表单独存成一个文件，通过drop table系统会删掉这个文件。<br>3.单纯delete表不用的数据，表文件大小不变，还要通过alter table重建表才可以把表变小。<br>4.本文还涉及inplace和online的区别，以及onlineDDL下的重建表的过程。<br>本讲问题：某人用了alter table后发现空间还大了点，是什么原因？</p>
+<h1 id="第十四讲-count-这么慢，我该怎么办？"><a href="#第十四讲-count-这么慢，我该怎么办？" class="headerlink" title="第十四讲 count(*)这么慢，我该怎么办？"></a>第十四讲 count(*)这么慢，我该怎么办？</h1><p>1.MyISAM表虽然count(<em>)快，但是不支持事务;show table status命令虽然快，但是不准确;InnoDB直接count(</em>)会遍历全表，虽然结果准确，但是有性能问题。<br>2.用redis来保存计数可能存在丢失更新的问题，也就是可能不一致。<br>3.把计数值放在MySql中，可以解决这个一致性视图的问题，利用了事务这个特性。<br>本讲问题：我们用事务来保证计数准确，那么这个事务序列中，应该先插入操作记录，还是先更新计数表呢？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>小陈同学
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://chenwingsing.github.io/2022/04/14/MySql%E7%AC%94%E8%AE%B0/" title="MySql笔记">https://chenwingsing.github.io/2022/04/14/MySql笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MySql/" rel="tag"># MySql</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/01/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E5%9B%9B%EF%BC%89NodeRed%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" rel="prev" title="树莓派HomeAssistant系列（四）NodeRed安装配置">
+                  <i class="fa fa-chevron-left"></i> 树莓派HomeAssistant系列（四）NodeRed安装配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/07/%E4%BB%BF%E7%89%9B%E5%AE%A2%E7%BD%91%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" rel="next" title="仿牛客网项目记录">
+                  仿牛客网项目记录 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小陈同学</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://unpkg.com/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://unpkg.com/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
