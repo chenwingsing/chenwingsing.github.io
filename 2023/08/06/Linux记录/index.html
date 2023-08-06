@@ -20,29 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"chenwingsing.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.14.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="cron用于定时任务，本笔记用于记录相关语法">
+    <meta name="description" content="记录linux一些操作。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cron定时表达式笔记">
-<meta property="og:url" content="https://chenwingsing.github.io/2022/02/14/cron%E5%AE%9A%E6%97%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="Linux记录">
+<meta property="og:url" content="https://chenwingsing.github.io/2023/08/06/Linux%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="小陈同学">
-<meta property="og:description" content="cron用于定时任务，本笔记用于记录相关语法">
+<meta property="og:description" content="记录linux一些操作。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-14T13:02:36.000Z">
-<meta property="article:modified_time" content="2022-02-15T02:15:00.000Z">
+<meta property="article:published_time" content="2023-08-06T12:17:51.000Z">
+<meta property="article:modified_time" content="2023-08-06T12:29:21.050Z">
 <meta property="article:author" content="小陈同学">
-<meta property="article:tag" content="cron">
-<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://chenwingsing.github.io/2022/02/14/cron%E5%AE%9A%E6%97%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%AC%94%E8%AE%B0/">
+<link rel="canonical" href="https://chenwingsing.github.io/2023/08/06/Linux%E8%AE%B0%E5%BD%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://chenwingsing.github.io/2022/02/14/cron%E5%AE%9A%E6%97%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%AC%94%E8%AE%B0/","path":"2022/02/14/cron定时表达式笔记/","title":"cron定时表达式笔记"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://chenwingsing.github.io/2023/08/06/Linux%E8%AE%B0%E5%BD%95/","path":"2023/08/06/Linux记录/","title":"Linux记录"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>cron定时表达式笔记 | 小陈同学</title>
+<title>Linux记录 | 小陈同学</title>
   
 
 
@@ -131,7 +129,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -144,6 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E4%B8%8B%E8%AE%BE%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">linux下设置定时任务</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -205,7 +204,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://chenwingsing.github.io/2022/02/14/cron%E5%AE%9A%E6%97%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%AC%94%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://chenwingsing.github.io/2023/08/06/Linux%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -218,12 +217,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="cron定时表达式笔记 | 小陈同学">
+      <meta itemprop="name" content="Linux记录 | 小陈同学">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          cron定时表达式笔记
+          Linux记录
         </h1>
 
         <div class="post-meta-container">
@@ -233,15 +232,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-02-14 21:02:36" itemprop="dateCreated datePublished" datetime="2022-02-14T21:02:36+08:00">2022-02-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-02-15 10:15:00" itemprop="dateModified" datetime="2022-02-15T10:15:00+08:00">2022-02-15</time>
+      <time title="创建时间：2023-08-06 20:17:51 / 修改时间：20:29:21" itemprop="dateCreated datePublished" datetime="2023-08-06T20:17:51+08:00">2023-08-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,7 +242,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
         </span>
     </span>
 
@@ -263,129 +256,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>cron用于定时任务，本笔记用于记录相关语法</p>
+        <p>记录linux一些操作。</p>
 <span id="more"></span>
+<h1 id="linux下设置定时任务"><a href="#linux下设置定时任务" class="headerlink" title="linux下设置定时任务"></a>linux下设置定时任务</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e #进入编辑界面设置定时任务</span><br></pre></td></tr></table></figure>
 
-<p><strong>需要注意的是不同软件有些定义略有不同，比如“周”，有些是定义0-6，有些是1-7，具体请做好详细测试再上线！</strong></p>
-<p><strong>字段描述</strong></p>
-<!--more-->
+<p>然后添加以下内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 6 * * * /usr/bin/python3 /home/pi/rent.py #每天6点执行一次</span><br></pre></td></tr></table></figure>
 
-<table>
-<thead>
-<tr>
-<th align="center">序号</th>
-<th align="center">字段</th>
-<th align="center">允许值范围</th>
-<th>允许符号</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">Seconds 秒</td>
-<td align="center">0-59</td>
-<td>, - * &#x2F;</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">Minutes 分</td>
-<td align="center">0-59</td>
-<td>, - * &#x2F;</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">Hours 时</td>
-<td align="center">0-23</td>
-<td>, - * &#x2F;</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">Day-of-Month 日</td>
-<td align="center">1-31</td>
-<td>,- * ? &#x2F; L W C</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td align="center">Month 月</td>
-<td align="center">1-12 或者 JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV,DEC</td>
-<td>, - * &#x2F;</td>
-</tr>
-<tr>
-<td align="center">6</td>
-<td align="center">Day-of-Week 周</td>
-<td align="center"><strong>这里数字不确定</strong> 或者”SUN, MON, TUE, WED, THU, FRI, SAT”</td>
-<td>, - * ? &#x2F; L C #</td>
-</tr>
-<tr>
-<td align="center">7</td>
-<td align="center">Year(可选) 年</td>
-<td align="center">1970-2099</td>
-<td>, - * &#x2F;</td>
-</tr>
-</tbody></table>
-<p><strong>具体符号解释</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">符号</th>
-<th align="center">解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">,</td>
-<td align="center">表示列出枚举值。例如：在Minutes域使用5,20，则意味着在第5分钟和第20分种触发一次。</td>
-</tr>
-<tr>
-<td align="center">-</td>
-<td align="center">表示范围。例如在Minutes域使用5-20，表示从5分到20分钟每分钟触发一次。</td>
-</tr>
-<tr>
-<td align="center">&#x2F;</td>
-<td align="center">表示起始时间开始触发，然后每隔固定时间触发一次。例如在Minutes域使用5&#x2F;20,则意味着第5分钟开始触发，然后每隔20分钟再次触发，如25,45分钟会触发。</td>
-</tr>
-<tr>
-<td align="center">L</td>
-<td align="center">只能出现在<strong>Day of Week(周)和Day of Month(日) 中</strong>，表示最后。week中使用：表示每周最后一天（周六），月中使用表示：每月最后一天。</td>
-</tr>
-<tr>
-<td align="center">?</td>
-<td align="center">只能出现在<strong>Day of Week(周)和Day of Month(日) 中</strong>，匹配区域的任意值，<strong>但是他们会相互影响</strong>，比如。例如想在每月的20日触发调度，不管20日到底是星期几，则只能使用如下写法： 0 0 0 20 * ?, 其中最后一位只能用？，而不能使用<em>，如果使用</em>表示不管星期几都会触发，这样就会有矛盾</td>
-</tr>
-<tr>
-<td align="center">W</td>
-<td align="center">只能出现在<strong>Day of Month(月)中</strong>，用来触发工作日，系统将在离指定日期的最近的有效工作日触发事件。例如：5W，触发第五个工作日，如果5日是星期六，则将在最近的工作日：星期五，即4日触发。如果5日是星期天，则在6日(周一)触发；如果5日在星期一到星期五中的一天，则就在5日触发。另外一点，W的最近寻找不会跨过月份。<strong>未测试成功这个指令，可能有些系统不支持。</strong></td>
-</tr>
-<tr>
-<td align="center">#</td>
-<td align="center">只能出现在<strong>Day of Week(周)中</strong>，如FRI#3，表示第三个周五</td>
-</tr>
-<tr>
-<td align="center">LW</td>
-<td align="center">这两个字符可以连用，表示在某个月最后一个工作日，即最后一个星期五</td>
-</tr>
-<tr>
-<td align="center">C</td>
-<td align="center">未找到相关解释</td>
-</tr>
-</tbody></table>
-<p><strong>收集了一些例子</strong><br>“0 0 10,14,16 * * ?” 每天上午10点，下午2点，4点 </p>
-<p>“0 0&#x2F;30 9-17 * * ?” 朝九晚五工作时间内每半小时</p>
-<p>“0 0 12 ? * WED” 表示每个星期三中午12点 </p>
-<p>“0 0 12 * * ?” 每天中午12点触发 </p>
-<p>“0 15 10 ? * *” 每天上午10:15触发 </p>
-<p>“0 15 10 * * ?” 每天上午10:15触发 </p>
-<p>“0 15 10 * * ? *” 每天上午10:15触发 </p>
-<p>“0 15 10 * * ? 2005” 2005年的每天上午10:15触发 </p>
-<p>“0 * 14 * * ?” 在每天下午2点到下午2:59期间的每1分钟触发 </p>
-<p>“0 0&#x2F;5 14 * * ?” 在每天下午2点到下午2:55期间的每5分钟触发 </p>
-<p>“0 0&#x2F;5 14,18 * * ?” 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发 </p>
-<p>“0 0-5 14 * * ?” 在每天下午2点到下午2:05期间的每1分钟触发 </p>
-<p>“0 10,44 14 ? 3 WED” 每年三月的星期三的下午2:10和2:44触发 </p>
-<p>“0 15 10 ? * MON-FRI” 周一至周五的上午10:15触发 </p>
-<p>“0 15 10 15 * ?” 每月15日上午10:15触发 </p>
-<p>“0 15 10 L * ?” 每月最后一日的上午10:15触发 </p>
-<p>“0 15 10 ? * 6L” 每月的最后一个星期五上午10:15触发</p>
-<p>“0 15 10 ? * 6L 2002-2005” 2002年至2005年的每月的最后一个星期五上午10:15触发 </p>
-<p>“0 15 10 ? * 6#3” 每月的第三个星期五上午10:15触发</p>
+<p>然后重启定时任务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service cron restart</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -403,7 +282,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://chenwingsing.github.io/2022/02/14/cron%E5%AE%9A%E6%97%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%AC%94%E8%AE%B0/" title="cron定时表达式笔记">https://chenwingsing.github.io/2022/02/14/cron定时表达式笔记/</a>
+      <a href="https://chenwingsing.github.io/2023/08/06/Linux%E8%AE%B0%E5%BD%95/" title="Linux记录">https://chenwingsing.github.io/2023/08/06/Linux记录/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -411,23 +290,16 @@
 </ul>
 </div>
 
-          <div class="post-tags">
-              <a href="/tags/cron/" rel="tag"># cron</a>
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/02/11/%E8%AE%B0%E5%BD%95%E7%AC%AC%E4%B8%80%E6%AC%A1HomeAssistant%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6%E7%9A%84%E5%8E%86%E7%A8%8B/" rel="prev" title="记录第一次HomeAssistant开发插件的历程">
-                  <i class="fa fa-chevron-left"></i> 记录第一次HomeAssistant开发插件的历程
+                <a href="/2022/06/07/%E4%BB%BF%E7%89%9B%E5%AE%A2%E7%BD%91%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" rel="prev" title="仿牛客网项目记录">
+                  <i class="fa fa-chevron-left"></i> 仿牛客网项目记录
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/03/05/%E6%A0%91%E8%8E%93%E6%B4%BEHomeAssistant%E7%B3%BB%E5%88%97%EF%BC%88%E4%BA%8C%EF%BC%89MQTT%E7%9B%91%E6%8E%A7%E4%BD%A0%E7%9A%84%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="next" title="树莓派HomeAssistant系列（二）MQTT监控你的树莓派">
-                  树莓派HomeAssistant系列（二）MQTT监控你的树莓派 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
