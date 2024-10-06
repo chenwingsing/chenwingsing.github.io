@@ -28,7 +28,7 @@
 <meta property="og:description" content="记录一些金融方面交易的知识。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-05T07:17:51.000Z">
-<meta property="article:modified_time" content="2024-10-05T08:57:02.849Z">
+<meta property="article:modified_time" content="2024-10-06T03:13:36.828Z">
 <meta property="article:author" content="小陈同学">
 <meta name="twitter:card" content="summary">
 
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%9F%E6%9D%83%EF%BC%88%E6%AF%94%E8%82%A1%E7%A5%A8%E9%A3%8E%E9%99%A9%E9%AB%98%EF%BC%8C%E8%B0%A8%E6%85%8E%EF%BC%8C%E4%BB%85%E7%94%A8%E4%BA%8E%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">期权（比股票风险高，谨慎，仅用于学习概念）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%B0%E5%85%A5%E7%9C%8B%E6%B6%A8%E6%9C%9F%E6%9D%83%EF%BC%88Long-Call%EF%BC%89"><span class="nav-number">1.0.1.</span> <span class="nav-text">买入看涨期权（Long Call）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%96%E5%87%BA%E7%9C%8B%E6%B6%A8%E6%9C%9F%E6%9D%83%EF%BC%88Short-Call%EF%BC%89"><span class="nav-number">1.0.2.</span> <span class="nav-text">卖出看涨期权（Short Call）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%B0%E5%85%A5%E7%9C%8B%E8%B7%8C%E6%9C%9F%E6%9D%83%EF%BC%88Long-Put%EF%BC%89"><span class="nav-number">1.0.3.</span> <span class="nav-text">买入看跌期权（Long Put）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%96%E5%87%BA%E7%9C%8B%E8%B7%8C%E6%9C%9F%E6%9D%83%EF%BC%88Short-Put%EF%BC%89"><span class="nav-number">1.0.4.</span> <span class="nav-text">卖出看跌期权（Short Put）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">1.0.5.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="nav-number">1.0.6.</span> <span class="nav-text">其他概念：</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%9F%E6%9D%83%EF%BC%88%E6%AF%94%E8%82%A1%E7%A5%A8%E9%A3%8E%E9%99%A9%E9%AB%98%EF%BC%8C%E8%B0%A8%E6%85%8E%EF%BC%8C%E4%BB%85%E7%94%A8%E4%BA%8E%E5%AD%A6%E4%B9%A0%E6%A6%82%E5%BF%B5%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">期权（比股票风险高，谨慎，仅用于学习概念）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%B0%E5%85%A5%E7%9C%8B%E6%B6%A8%E6%9C%9F%E6%9D%83%EF%BC%88Long-Call%EF%BC%89"><span class="nav-number">1.0.1.</span> <span class="nav-text">买入看涨期权（Long Call）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%96%E5%87%BA%E7%9C%8B%E6%B6%A8%E6%9C%9F%E6%9D%83%EF%BC%88Short-Call%EF%BC%89"><span class="nav-number">1.0.2.</span> <span class="nav-text">卖出看涨期权（Short Call）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%B0%E5%85%A5%E7%9C%8B%E8%B7%8C%E6%9C%9F%E6%9D%83%EF%BC%88Long-Put%EF%BC%89"><span class="nav-number">1.0.3.</span> <span class="nav-text">买入看跌期权（Long Put）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%96%E5%87%BA%E7%9C%8B%E8%B7%8C%E6%9C%9F%E6%9D%83%EF%BC%88Short-Put%EF%BC%89"><span class="nav-number">1.0.4.</span> <span class="nav-text">卖出看跌期权（Short Put）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.0.5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5"><span class="nav-number">1.0.6.</span> <span class="nav-text">其他概念</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -232,9 +232,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-10-05 15:17:51 / 修改时间：16:57:02" itemprop="dateCreated datePublished" datetime="2024-10-05T15:17:51+08:00">2024-10-05</time>
+      <time title="创建时间：2024-10-05 15:17:51" itemprop="dateCreated datePublished" datetime="2024-10-05T15:17:51+08:00">2024-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-06 11:13:36" itemprop="dateModified" datetime="2024-10-06T11:13:36+08:00">2024-10-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -293,19 +299,56 @@
 <li><strong>风险</strong>：如果资产价格下跌，损失可能是无限的。</li>
 <li><strong>成本</strong>：收到期权费，但需要提供保证金或抵押品。</li>
 </ul>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
 <li><strong>买入期权</strong>（无论是看涨还是看跌）：支付期权费以获得未来买入或卖出资产的权利。风险有限，收益可能无限。</li>
 <li><strong>卖出期权</strong>（无论是看涨还是看跌）：收取期权费，但承担未来可能需要以执行价格买入或卖出资产的义务。收益有限，风险可能无限。</li>
 </ul>
 <p>期权交易是一种复杂的金融操作，需要对市场有深入的了解和风险管理能力。</p>
-<h3 id="其他概念："><a href="#其他概念：" class="headerlink" title="其他概念："></a>其他概念：</h3><p>1.买入开仓，卖出平仓</p>
+<h3 id="其他概念"><a href="#其他概念" class="headerlink" title="其他概念"></a>其他概念</h3><p>1.买入开仓，卖出平仓</p>
 <p>   卖出开仓，买入平仓。</p>
 <p>2.选择流动性更好的期权：买卖差价越小，流动性更好。还有成交量和未平仓数都要最好大于1000</p>
 <p>3.波动率：历史波动率（过去一段时间股价波动），隐含波动率（公式模型推导出来的，对未来的预期）</p>
 <p>4.期权的价格和价值基本上是相等，不同于股票。期权价值&#x3D;内在价值+时间价值</p>
 <p>5.玩期权一般不是真的让你去行权，而是玩波动率</p>
 <p>6.六大因素：执行价格，到期日，无风险利率，股利，正股价格，隐含波动率。隐含波动率基本跟价格是同向关系。一些波动不太大的股票，隐含波动率到了30%已经是很高了，但是对于交易量小，波动率大的股票，大于30%以上都是很正常的。隐含波动率大于历史波动率，意味着现在期权价格偏高。股票价格上升，隐含波动率也同时上升，那就意味着对股票持续看好，如果股票价格上升，但是隐含波动率下降，可能是股票涨势见顶的信号。股价下跌，波动率在上升，意味着股价继续下跌的可能性是很大的，如果两个都在下跌，这可能是见底的信号。</p>
-<p>看完了《利用隐含波动率，看清价格走势》</p>
+<p>7.Covered call（备兑看涨）：通常是1.你认为这个公司不会大涨大跌，慢慢一点点往上面涨跌，类似可口可乐。2.股票快要涨到目标价也可以使用这个策略。总之这种小涨的时候挣钱，大涨不挣钱。</p>
+<p>行权价略高于股票价格，同时到期日在两个月之内。</p>
+<p>Covered call是一种期权交易策略，它涉及持有股票的同时卖出（即卖出看涨期权）该股票的看涨期权。这种策略通常被投资者用来从持有的股票中获得额外收入。简单来说，针对上面的1:比如股票现在100块（注意你目前要持有该股票），那卖出一个一个月内105块到期的看涨期权，挣一个期权费，如果接下来一个月公司股票没有涨到105，那么我们就不会被行权，全部挣到这个期权费，如果涨到了105，我们手上是有股票，大不了交割股票出去。针对上面的2:比如股票30块，然后我们的目标价是100，我们先卖出一个一个月到期的100块期权，然后现在股票价格是96，接近目标价，到了100到话，大不了把股票卖出去，因为这本来就是我们的目标价。</p>
+<p>具体来说，Covered call的步骤如下：</p>
+<ol>
+<li><p><strong>持有股票</strong>：投资者首先需要持有一定数量的股票。</p>
+</li>
+<li><p><strong>卖出看涨期权</strong>：然后，投资者卖出该股票的看涨期权。这意味着投资者同意在期权到期日或之前以期权的执行价格卖出股票。</p>
+</li>
+<li><p><strong>收取期权费</strong>：卖出看涨期权时，投资者会收到期权买方支付的期权费。</p>
+</li>
+<li><p><strong>期权到期</strong>：如果股票价格在期权到期时低于执行价格，期权将不会被行使，投资者保留股票并保留期权费作为额外收入。</p>
+</li>
+<li><p><strong>期权被行使</strong>：如果股票价格在期权到期时高于执行价格，期权可能会被行使，投资者必须以执行价格卖出股票。即使股票的市场价格高于执行价格，投资者也只能以较低的执行价格卖出股票。</p>
+</li>
+</ol>
+<p>Covered call策略的优点包括：</p>
+<ul>
+<li><strong>额外收入</strong>：通过收取期权费获得额外收入。</li>
+<li><strong>降低持股成本</strong>：如果期权被行使，期权费可以降低持股成本。</li>
+</ul>
+<p>缺点包括：</p>
+<ul>
+<li><strong>限制上行潜力</strong>：如果股票价格大幅上涨，投资者必须以执行价格卖出股票，无法从股票的进一步上涨中获益。</li>
+<li><strong>需要持有股票</strong>：需要持有股票，这意味着需要有足够的资金来购买股票。</li>
+</ul>
+<p>Covered call是一种相对保守的策略，适合那些希望从持有的股票中获得额外收入，同时愿意接受一定程度的价格上限的投资者。</p>
+<ol start="8">
+<li><p>做空：1.通过融券做空，2.卖出一个看涨期权（对小资金玩家友好），3.买入一个看跌期权</p>
+</li>
+<li><p>善于用期权计算器来计算一个合理价格进场和退出</p>
+</li>
+<li><p>宽跨式策略：买入看涨期权，同时买入一张看跌期权</p>
+<p>该公司目前115块，买入一张即将到期的行权价120块的看涨期权，期权费3块。也就是当股票价格超过120块，股票本身可以盈利，不过要到123以上我们才是盈亏平衡。看跌期权背景：行权价105块，期权费1块，当股票低于105块，股票本身可以盈利，不过要跌到104以下才能盈亏平衡。同时持有的话，我们需要花3+1&#x3D;4块的期权费，那么这时候的盈亏平衡点分别是101和124，然后未来到期前，如果公司只是小幅度波动的话，我们是不挣钱的，如果大幅度波动，超过124，或者跌破101，那么我们就能够挣钱。反过来，如果你对未来的市场预测是小幅震荡，那么你可以选择卖出宽跨式期权。</p>
+</li>
+<li><p>学会主要的六大策略：备兑看涨，裸卖看跌期权，牛市价差，熊市价差，宽跨式策略，反向宽跨式策略。</p>
+</li>
+</ol>
 
     </div>
 
