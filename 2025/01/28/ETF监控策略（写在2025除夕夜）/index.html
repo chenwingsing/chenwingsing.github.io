@@ -28,7 +28,7 @@
 <meta property="og:description" content="全面拥抱AI，这个除夕夜有点不一样！">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-28T10:18:18.000Z">
-<meta property="article:modified_time" content="2025-01-28T10:09:15.885Z">
+<meta property="article:modified_time" content="2025-01-28T10:23:46.986Z">
 <meta property="article:author" content="小陈同学">
 <meta name="twitter:card" content="summary">
 
@@ -234,7 +234,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-01-28 18:18:18 / 修改时间：18:09:15" itemprop="dateCreated datePublished" datetime="2025-01-28T18:18:18+08:00">2025-01-28</time>
+      <time title="创建时间：2025-01-28 18:18:18 / 修改时间：18:23:46" itemprop="dateCreated datePublished" datetime="2025-01-28T18:18:18+08:00">2025-01-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,6 +270,7 @@
 <p>然后添加一下内容，注释记得删掉，这里是给自己看的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/home/pi/etf.log &#123;</span><br><span class="line">    daily              # 每天轮转一次</span><br><span class="line">    rotate 7           # 保留最近 7 天的日志</span><br><span class="line">    missingok          # 如果日志文件不存在，忽略错误</span><br><span class="line">    notifempty         # 如果日志文件为空，不轮转</span><br><span class="line">    create 644 pi pi   # 创建新日志文件时设置权限和所有者</span><br><span class="line">    nocompress         # 不压缩旧的日志文件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以手动运行 logrotate 测试配置是否正确<br><code>sudo logrotate -vf /etc/logrotate.d/etf_log</code><br>最后可以查看你的程序是否在运行<br><code>ps aux | grep python</code></p>
+<p>拥抱AI，去感受这个星球最顶级的人做出来的东西！！！</p>
 
     </div>
 
